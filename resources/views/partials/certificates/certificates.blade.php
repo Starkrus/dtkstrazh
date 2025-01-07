@@ -46,3 +46,11 @@
     </div>
 </div>
 </body>
+
+<footer class="mt-12">
+    @include('partials.home.footer', [
+        'companyName' => 'Military Equipment Store',
+        'aboutText' => 'Мы специализируемся на продаже военной техники и оборудования.',
+        'contactEmail' => 'info@military-store.ru',
+    ])
+</footer>

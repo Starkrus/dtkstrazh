@@ -5,6 +5,7 @@
         'cartItems' => session('cart', []),
     ])
 </header>
+<section class="py-8">
     <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold mb-8">О компании</h1>
 
@@ -40,4 +41,12 @@
             </div>
         </div>
     </div>
+</section>
 
+<footer class="mt-12">
+    @include('partials.home.footer', [
+        'companyName' => 'Military Equipment Store',
+        'aboutText' => 'Мы специализируемся на продаже военной техники и оборудования.',
+        'contactEmail' => 'info@military-store.ru',
+    ])
+</footer>
