@@ -1,28 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
-    <script>
-        // Отключить правую кнопку мыши
-        document.addEventListener('contextmenu', function (event) {
-            event.preventDefault();
-        });
-
-        // Отключить выделение текста
-        document.addEventListener('selectstart', function (event) {
-            event.preventDefault();
-        });
-
-        // Отключить перетаскивание
-        document.addEventListener('dragstart', function (event) {
-            event.preventDefault();
-        });
-    </script>
-</head>
 <body class="bg-gray-100" oncopy="return false" oncut="return false" onpaste="return false">
 
 <!-- Шапка -->
@@ -53,4 +28,4 @@
 </footer>
 
 </body>
-</html>
+
