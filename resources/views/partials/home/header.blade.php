@@ -37,6 +37,8 @@
                 <a href="/products" class="hover:text-gray-300">Продукция</a>
                 <a href="/about" class="hover:text-gray-300">О нас</a>
                 <a href="/certificates" class="hover:text-gray-300">Сертификаты</a>
+                <a href="/partnery" class="hover:text-gray-300">Партнеры</a>
+                <a href="/contacts" class="hover:text-gray-300">Контакты</a>
             </nav>
 
             <!-- Корзина и мобильное меню -->
