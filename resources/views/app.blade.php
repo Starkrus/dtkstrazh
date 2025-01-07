@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
 
 <!-- Шапка -->
 <header class="mb-8">
-    @include('partials.header', [
+    @include('partials.home.header', [
         'companyName' => 'Military Equipment Store',
         'cartItems' => session('cart', []),
     ])
@@ -35,17 +35,17 @@
 
 <!-- Секция преимуществ -->
 <section class="mb-12">
-    @include('partials.advantagesSection')
+    @include('partials.home.advantagesSection')
 </section>
 
 <!-- Секция отзывов -->
 <section class="mb-12 px-4 lg:px-0">
-    @include('partials.reviews')
+    @include('partials.home.reviews')
 </section>
 
 <!-- Подвал -->
 <footer class="mt-12">
-    @include('partials.footer', [
+    @include('partials.home.footer', [
         'companyName' => 'Military Equipment Store',
         'aboutText' => 'Мы специализируемся на продаже военной техники и оборудования.',
         'contactEmail' => 'info@military-store.ru',
