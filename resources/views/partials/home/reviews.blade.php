@@ -3,21 +3,23 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="border border-gray-300 rounded-lg p-4 shadow-lg">
-            <h3 class="text-xl font-semibold">Иван Иванов</h3>
-            <p class="text-gray-700 mt-2">Отличный сервис и быстрая доставка! Очень доволен покупкой.</p>
+            <h3 class="text-xl font-semibold">Виктор К</h3>
+            <p class="text-gray-700 mt-2">"Пользуюсь ДТКП «Страж» на соревнованиях. Отличное снижение звука и комфортная стрельба даже при интенсивной нагрузке. Хотелось бы чуть больше вариантов цвета, но это мелочи."</p>
             <p class="text-sm text-gray-500 mt-4">Дата: 2025-01-04</p>
         </div>
 
         <div class="border border-gray-300 rounded-lg p-4 shadow-lg">
-            <h3 class="text-xl font-semibold">Мария Смирнова</h3>
-            <p class="text-gray-700 mt-2">Качество товаров на высоте. Заказывала уже несколько раз, всё идеально.</p>
+            <h3 class="text-xl font-semibold">Алексей Г., военнослужащий</h3>
+            <p class="text-gray-700 mt-2">"ДТКП «Страж» — это лучшее, что я пробовал. Легкий, надежный, работает на все 100%. Отличная стабилизация и снижение звука. Наше подразделение активно использует продукцию «Страж». Спасибо за качество!"</p>
             <p class="text-sm text-gray-500 mt-4">Дата: 2025-01-03</p>
         </div>
 
         <div class="border border-gray-300 rounded-lg p-4 shadow-lg">
-            <h3 class="text-xl font-semibold">Алексей Петров</h3>
-            <p class="text-gray-700 mt-2">Очень понравился ассортимент и цены. Буду заказывать ещё!</p>
+            <h3 class="text-xl font-semibold">Игорь М</h3>
+            <p class="text-gray-700 mt-2">"Использую ДТКП «Страж» для АК-12М1 уже больше полугода. Устройство значительно снижает отдачу и шум, что особенно важно при длительных тренировках. Качество сборки превосходное, материал прочный, а покрытие устойчиво к износу. Однозначно рекомендую!"</p>
             <p class="text-sm text-gray-500 mt-4">Дата: 2025-01-02</p>
         </div>
     </div>
 </div>
+
+

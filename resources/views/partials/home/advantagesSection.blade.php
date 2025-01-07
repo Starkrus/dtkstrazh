@@ -5,8 +5,8 @@
         </div>
         <div class="relative h-full flex items-center justify-center text-white">
             <div class="text-center space-y-4">
-                <h1 class="text-5xl font-bold">Военное снаряжение</h1>
-                <p class="text-xl">Профессиональное снаряжение для профессионалов</p>
+                <h1 class="text-5xl font-bold">Снаряжение</h1>
+                <p class="text-xl">"Точность. Надежность. Ваш Защитник."</p>
                 <a
                     href="/products"
                     class="inline-block bg-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-700"

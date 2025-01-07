@@ -3,7 +3,7 @@
 <!-- Шапка -->
 <header class="mb-8">
     @include('partials.home.header', [
-        'companyName' => 'Military Equipment Store',
+        'companyName' => '"СТРАЖ"',
         'cartItems' => session('cart', []),
     ])
 </header>
