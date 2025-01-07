@@ -16,11 +16,15 @@
                     </div>
                     <div class="flex items-center">
                         <span class="w-5 h-5 mr-2">📞</span>
-                        <span>+7 (XXX) XXX-XX-XX</span>
+                        <span>+7 (949) 847-10-22</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-5 h-5 mr-2">📞</span>
+                        <span>+7 (922) 186-86-46</span>
                     </div>
                     <div class="flex items-center">
                         <span class="w-5 h-5 mr-2">📍</span>
-                        <span>Адрес компании</span>
+                        <span>г.Екатеринбург</span>
                     </div>
                 </div>
             </div>
