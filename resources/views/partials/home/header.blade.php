@@ -47,30 +47,30 @@
                 <span class="ml-2 text-2xl font-bold">{{ $companyName }}</span> <!-- Название компании -->
             </a>
 
-            <!-- Поиск товаров -->
+            <!-- Учитываем мобильное/десктопное отображение -->
             <div class="flex items-center space-x-4">
-                <!-- Иконка поиска для мобильных устройств -->
-                <button id="searchButton" class="bg-transparent border-none" onclick="toggleSearch()">
+                <!-- Кнопка для мобильной версии (поиск) -->
+                <button id="searchButton" class="bg-transparent border-none md:hidden" onclick="toggleSearch()">
                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 0l6 6"></path>
                     </svg>
                 </button>
 
-                <!-- Поле поиска (оно теперь всегда видно) -->
-                <input id="searchInput" type="text" placeholder="Поиск товаров" class="px-4 py-2 text-black rounded-lg">
+                <!-- Поле поиска (скрыто на мобильной версии, всегда видно на десктопе) -->
+                <input id="searchInput" type="text" placeholder="Поиск товаров" class="px-4 py-2 text-black rounded-lg hidden md:block">
 
-                <!-- Кнопка поиска на десктопе (всегда видна) -->
-                <button class="bg-red-600 px-4 py-2 text-white rounded-lg hover:bg-red-700">Поиск</button>
+                <!-- Кнопка поиска на десктопе -->
+                <button class="bg-red-600 px-4 py-2 text-white rounded-lg hover:bg-red-700 hidden md:block">Поиск</button>
 
-                <!-- Кнопка телефона для мобильных устройств -->
-                <button id="phoneButton" class="bg-transparent border-none" onclick="togglePhoneNumbers()">
+                <!-- Кнопка для мобильной версии (телефон) -->
+                <button id="phoneButton" class="bg-transparent border-none md:hidden" onclick="togglePhoneNumbers()">
                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l4.5-4.5m0 0L19.5 5M19.5 5A2.5 2.5 0 0 1 22 7.5l-3 3m0 0L19.5 5m0 0a2.5 2.5 0 0 0 2.5 2.5L19.5 5l2.5 5"></path>
                     </svg>
                 </button>
 
-                <!-- Список номеров телефонов (всегда виден) -->
-                <div id="phoneNumbers" class="text-white">
+                <!-- Список телефонов (скрыт на мобильной версии, виден на десктопе) -->
+                <div id="phoneNumbers" class="text-white hidden md:block">
                     <ul>
                         <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
                         <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
