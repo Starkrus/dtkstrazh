@@ -36,7 +36,6 @@
                     <li><a href="/products" class="hover:text-gray-300">Продукция</a></li>
                     <li><a href="/about" class="hover:text-gray-300">О нас</a></li>
                     <li><a href="/certificates" class="hover:text-gray-300">Сертификаты</a></li>
-                    <li><a href="/admin" class="hover:text-gray-300">Админ-панель</a></li>
                 </ul>
             </div>
         </div>
