@@ -45,8 +45,8 @@
             <!-- Корзина и мобильное меню -->
             <div class="flex items-center space-x-4">
                 <!-- Корзина -->
-                <a href="/cart" class="relative">
-                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="/cart" class="relative flex items-center">
+                    <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.34 2.63M7.4 12h11.2a1 1 0 00.98-.78l2.48-8A1 1 0 0021.1 2H5.66l-1-3H1" />
                     </svg>
                     @if(count($cartItems) > 0)
@@ -54,6 +54,16 @@
                                 {{ count($cartItems) }}
                             </span>
                     @endif
+                </a>
+
+                <!-- Кнопка "Добавить в избранное" -->
+                <a href="/favorites" class="relative flex items-center">
+                    <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12l5 5L20 7" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                            0 <!-- Здесь можно поставить количество избранных товаров -->
+                        </span>
                 </a>
 
                 <!-- Кнопка мобильного меню -->
