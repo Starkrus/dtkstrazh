@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="border border-gray-300 rounded-lg p-4 shadow-lg">
             <h3 class="text-xl font-semibold">Виктор К</h3>
-            <p class="text-gray-700 mt-2">"Пользуюсь ДТКП «Страж». Отличное снижение звука и комфортная стрельба даже при интенсивной нагрузке. Хотелось бы чуть больше вариантов цвета, но это мелочи."</p>
+            <p class="text-gray-700 mt-2">"Пользуюсь ДТКП «Страж». Отличное снижение звука и комфортная стрельба даже при интенсивной нагрузке."</p>
             <p class="text-sm text-gray-500 mt-4">Дата: 2025-01-04</p>
         </div>
 
