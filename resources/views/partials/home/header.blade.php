@@ -8,20 +8,32 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
     <script>
-        // Отключить правую кнопку мыши
+        // Отключение правой кнопки мыши
         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
         });
 
-        // Отключить выделение текста
+        // Отключение выделения текста
         document.addEventListener('selectstart', function (event) {
             event.preventDefault();
         });
 
-        // Отключить перетаскивание
+        // Отключение перетаскивания
         document.addEventListener('dragstart', function (event) {
             event.preventDefault();
         });
+
+        // Функция для переключения видимости поля поиска
+        function toggleSearch() {
+            var searchInput = document.getElementById('searchInput');
+            searchInput.classList.toggle('hidden'); // Переключаем видимость поля
+        }
+
+        // Функция для переключения видимости номера телефона
+        function togglePhoneNumbers() {
+            var phoneNumbers = document.getElementById('phoneNumbers');
+            phoneNumbers.classList.toggle('hidden'); // Переключаем видимость списка номеров
+        }
     </script>
 </head>
 
@@ -34,6 +46,37 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Логотип" class="w-16 h-auto">
                 <span class="ml-2 text-2xl font-bold">{{ $companyName }}</span> <!-- Название компании -->
             </a>
+
+            <!-- Поиск товаров -->
+            <div class="flex items-center space-x-4">
+                <!-- Иконка поиска для мобильных устройств -->
+                <button id="searchButton" class="md:hidden bg-transparent border-none" onclick="toggleSearch()">
+                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 0l6 6"></path>
+                    </svg>
+                </button>
+
+                <!-- Поле поиска для мобильных устройств -->
+                <input id="searchInput" type="text" placeholder="Поиск товаров" class="px-4 py-2 text-black rounded-lg hidden md:block">
+
+                <!-- Кнопка поиска на десктопе -->
+                <button class="bg-red-600 px-4 py-2 text-white rounded-lg hover:bg-red-700 hidden md:block">Поиск</button>
+
+                <!-- Кнопка телефона для мобильных устройств -->
+                <button id="phoneButton" class="md:hidden bg-transparent border-none" onclick="togglePhoneNumbers()">
+                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l4.5-4.5m0 0L19.5 5M19.5 5A2.5 2.5 0 0 1 22 7.5l-3 3m0 0L19.5 5m0 0a2.5 2.5 0 0 0 2.5 2.5L19.5 5l2.5 5"></path>
+                    </svg>
+                </button>
+
+                <!-- Список номеров телефонов (скрыт по умолчанию) -->
+                <div id="phoneNumbers" class="hidden">
+                    <ul class="text-white">
+                        <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
+                        <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Навигация для больших экранов -->
             <nav class="hidden md:flex space-x-6">
