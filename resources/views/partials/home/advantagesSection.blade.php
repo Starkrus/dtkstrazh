@@ -1,8 +1,10 @@
 <div class="space-y-12">
     <section class="relative h-[500px]">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579912437766-7896df6d3cd9?auto=format&fit=crop&q=80')] bg-cover bg-center">
-            <div class="absolute inset-0 bg-black/50"></div>
-        </div>
+        <!-- Фоновое изображение с абсолютным позиционированием -->
+        <img src="{{ asset('build/images/baner.jpg') }}" alt="Баннер" class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="absolute inset-0 bg-black/50"></div>
+
         <div class="relative h-full flex items-center justify-center text-white">
             <div class="text-center space-y-4">
                 <h1 class="text-5xl font-bold">Снаряжение</h1>
