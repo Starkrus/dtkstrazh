@@ -49,7 +49,7 @@
             <div class="flex items-center space-x-4">
                 <!-- Корзина -->
                 <a href="/cart" class="relative flex items-center">
-                    <img src="{{ asset('images/cart-icon.png') }}" alt="Корзина" class="w-8 h-8">
+                    <img src="{{ asset('build/images/cart.svg') }}" alt="Корзина" class="w-8 h-8">
                     @if(count($cartItems) > 0)
                         <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                             {{ count($cartItems) }}
@@ -59,7 +59,7 @@
 
                 <!-- Кнопка "Добавить в избранное" -->
                 <a href="/favorites" class="relative flex items-center">
-                    <img src="{{ asset('images/heart-icon.png') }}" alt="Избранное" class="w-8 h-8">
+                    <img src="{{ asset('build/images/favourit.svg') }}" alt="Избранное" class="w-8 h-8">
                 </a>
 
                 <!-- Кнопка мобильного меню -->
