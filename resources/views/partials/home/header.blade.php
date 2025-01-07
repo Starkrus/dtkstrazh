@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Список телефонов (виден только на десктопе) -->
-                <div id="phoneNumbers" class="text-white">
+                <div id="phoneNumbers" class="hidden md:block text-white">
                     <ul>
                         <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
                         <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
