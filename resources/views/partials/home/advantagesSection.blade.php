@@ -10,7 +10,7 @@
                 <h1 class="text-5xl font-bold">Снаряжение</h1>
                 <p class="text-xl">"Точность. Надежность. Ваш Защитник."</p>
                 <a
-                    href="/products"
+                    href="/product"
                     class="inline-block bg-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-700"
                 >
                     Смотреть каталог
