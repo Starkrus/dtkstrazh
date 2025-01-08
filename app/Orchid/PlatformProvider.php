@@ -9,6 +9,7 @@ use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
+use App\Orchid\Resources\WeaponResource;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -41,7 +42,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Товар')
                 ->icon('bs.collection')
-                ->route('platform.example'),
+                ->route('platform.product'),
 
             Menu::make('Заказы')
                 ->icon('bs.collection')

@@ -31,7 +31,7 @@
         <div class="flex items-center justify-between">
             <!-- Логотип и название компании -->
             <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo.png') }}" alt="Логотип" class="w-16 h-auto">
+                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-16 h-auto">
                 <span class="ml-2 text-2xl font-bold">{{ $companyName }}</span> <!-- Название компании -->
             </a>
 
@@ -54,7 +54,7 @@
             <!-- Навигация для больших экранов -->
             <nav class="hidden md:flex space-x-6">
                 <a href="/" class="hover:text-gray-300">Главная</a>
-                <a href="/products" class="hover:text-gray-300">Продукция</a>
+                <a href="/product" class="hover:text-gray-300">Продукция</a>
                 <a href="/about" class="hover:text-gray-300">О нас</a>
                 <a href="/certificates" class="hover:text-gray-300">Сертификаты</a>
                 <a href="/partnery" class="hover:text-gray-300">Партнеры</a>
@@ -90,7 +90,7 @@
         <!-- Мобильное меню -->
         <div id="mobileMenu" class="hidden md:hidden bg-gray-800 text-white mt-2 p-4 rounded">
             <a href="/" class="block py-2 hover:text-gray-300">Главная</a>
-            <a href="/products" class="block py-2 hover:text-gray-300">Продукция</a>
+            <a href="/product" class="block py-2 hover:text-gray-300">Продукция</a>
             <a href="/about" class="block py-2 hover:text-gray-300">О нас</a>
             <a href="/certificates" class="block py-2 hover:text-gray-300">Сертификаты</a>
             <a href="/partnery" class="block py-2 hover:text-gray-300">Партнеры</a>

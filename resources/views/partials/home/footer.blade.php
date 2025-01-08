@@ -33,7 +33,7 @@
                 <h3 class="text-xl font-bold mb-4">Навигация</h3>
                 <ul class="space-y-2">
                     <li><a href="/" class="hover:text-gray-300">Главная</a></li>
-                    <li><a href="/products" class="hover:text-gray-300">Продукция</a></li>
+                    <li><a href="/product" class="hover:text-gray-300">Продукция</a></li>
                     <li><a href="/about" class="hover:text-gray-300">О нас</a></li>
                     <li><a href="/certificates" class="hover:text-gray-300">Сертификаты</a></li>
                 </ul>
