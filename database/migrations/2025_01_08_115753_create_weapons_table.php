@@ -20,6 +20,8 @@ class CreateWeaponsTable extends Migration
             $table->string('lifespan'); // Ресурс
             $table->string('coating'); // Покрытие
             $table->text('description'); // Описание
+            $table->decimal('price', 10, 2); // Цена
+            $table->integer('quantity'); // Количество
             $table->string('image')->nullable(); // Путь к изображению
             $table->timestamps(); // Временные метки
         });
