@@ -45,11 +45,13 @@
                 <a href="/contacts" class="hover:text-gray-300">Контакты</a>
             </nav>
 
-            <!-- Корзина и мобильное меню -->
+            <!-- Корзина, избранное и мобильное меню -->
             <div class="flex items-center space-x-4">
                 <!-- Корзина -->
                 <a href="/cart" class="relative flex items-center">
-                    <img src="{{ asset('build/images/cart.svg') }}" alt="Корзина" class="w-8 h-8">
+                    <svg class="w-6 h-6 text-white hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
                     @if(isset($cartItems) && count($cartItems) > 0)
                         <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                             {{ count($cartItems) }}
@@ -57,21 +59,23 @@
                     @endif
                 </a>
 
-                <!-- Кнопка "Добавить в избранное" -->
+                <!-- Избранное -->
                 <a href="/favorites" class="relative flex items-center">
-                    <img src="{{ asset('build/images/favourit.svg') }}" alt="Избранное" class="w-8 h-8">
+                    <svg class="w-6 h-6 text-white hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
                 </a>
 
                 <!-- Кнопка для телефонов (видна только на мобильной версии) -->
                 <button id="phoneToggle" class="md:hidden">
-                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-6 h-6 text-white hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                 </button>
 
                 <!-- Кнопка мобильного меню -->
                 <button id="mobileMenuToggle" class="md:hidden">
-                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-6 h-6 text-white hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
@@ -112,7 +116,6 @@
     const mobilePhoneNumbers = document.getElementById('mobilePhoneNumbers');
 
     phoneToggle.addEventListener('click', () => {
-        console.log('Кнопка телефона нажата'); // Проверка
         mobilePhoneNumbers.classList.toggle('hidden');
     });
 </script>
