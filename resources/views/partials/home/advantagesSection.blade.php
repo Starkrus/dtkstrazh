@@ -19,7 +19,7 @@
         </div>
     </section>
 
-    <section class="container mx-auto px-4">
+    <section class="py-8 bg-gray-50">
         <h2 class="text-3xl font-bold text-center mb-8">Наши преимущества</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="text-center space-y-4">
