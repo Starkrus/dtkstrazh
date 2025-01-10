@@ -1,103 +1,150 @@
-<!-- resources/views/product.blade.php -->
+@include('partials.home.header')
 
-<link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
-
-<header class="mb-8">
-    @include('partials.home.header', [
-        'companyName' => 'Military Equipment Store',
-        'cartItems' => session('cart', []),
-    ])
-</header>
-
-<section class="py-8">
+<section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-bold mb-8">{{ $product->name }}</h1>
+        <!-- Заголовок -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">{{ $product->name }}</h1>
 
+        <!-- Сетка с изображением и описанием товара -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Изображение товара -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                 @if ($product->image)
                     <img
                         src="{{ asset('storage/' . $product->image) }}"
                         alt="{{ $product->name }}"
                         class="w-full h-96 object-cover"
+                        loading="lazy"
                     />
                 @else
                     <img
-                        src="path_to_default_image.jpg"
+                        src="{{ asset('images/default_product_image.jpg') }}"
                         alt="Изображение не доступно"
                         class="w-full h-96 object-cover"
+                        loading="lazy"
                     />
                 @endif
             </div>
 
             <!-- Описание товара -->
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
                 <div>
-                    <h2 class="text-xl font-semibold mb-4">{{ $product->name }}</h2>
-                    <p class="text-gray-600 mb-4">
-                        Калибр: {{ $product->caliber }}<br>
-                        Тип крепления: {{ $product->mount_type }}<br>
-                        Материал корпуса: {{ $product->body_material }}<br>
-                        Первая камера: {{ $product->first_chamber_material }}<br>
-                        Количество камер: {{ $product->chamber_count }}<br>
-                        Снижение звукового давления: {{ $product->sound_reduction }}<br>
-                        Ресурс: {{ $product->lifespan }}<br>
-                        Покрытие: {{ $product->coating }}
-                    </p>
-                    <div class="text-xl font-bold mb-4">
-                        Цена: {{ number_format($product->price, 0, ',', ' ') }} ₽
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ $product->name }}</h2>
+                    <!-- Блок с описанием товара -->
+                    <div class="text-gray-600 mb-4 space-y-2">
+                        <p><span class="font-semibold">Калибр:</span> {{ $product->caliber }}</p>
+                        <p><span class="font-semibold">Тип крепления:</span> {{ $product->mount_type }}</p>
+                        <p><span class="font-semibold">Материал корпуса:</span> {{ $product->body_material }}</p>
+                        <p><span class="font-semibold">Первая камера:</span> {{ $product->first_chamber_material }}</p>
+                        <p><span class="font-semibold">Количество камер:</span> {{ $product->chamber_count }}</p>
+                        <p><span class="font-semibold">Снижение звукового давления:</span> {{ $product->sound_reduction }}</p>
+                        <p><span class="font-semibold">Ресурс:</span> {{ $product->lifespan }}</p>
+                        <p><span class="font-semibold">Покрытие:</span> {{ $product->coating }}</p>
+                    </div>
+                    <!-- Цена и количество на остатках -->
+                    <div class="text-2xl font-bold text-red-600 mb-4">
+                        Цена: <span id="productPrice">{{ number_format($product->price, 0, ',', ' ') }}</span> ₽
+                    </div>
+                    <div class="text-gray-600 mb-4">
+                        Количество на остатках: <span id="availableQuantity">{{ $product->quantity }}</span>
                     </div>
                 </div>
 
                 <!-- Выбор количества товара и кнопка в корзину -->
                 <div class="flex justify-between items-center">
-                    <!-- Выбор количества -->
-                    <form action="/cart/add/{{ $product->id }}" method="POST" class="flex items-center space-x-2 border border-gray-300 rounded-lg px-2 py-2">
-                        @csrf
+                    <!-- Форма выбора количества -->
+                    <div class="flex items-center space-x-2 border border-gray-300 rounded-lg overflow-hidden">
+                        <!-- Кнопка уменьшения количества -->
                         <button
-                            type="submit"
-                            name="quantity"
-                            value="decrease"
-                            class="bg-gray-200 text-xl px-3 py-2 rounded-l-md hover:bg-gray-300"
+                            type="button"
+                            id="decreaseQuantity"
+                            class="bg-gray-200 text-xl px-3 py-2 hover:bg-gray-300 transition-colors duration-200 focus:outline-none"
+                            aria-label="Уменьшить количество"
+                            onclick="updateQuantity(-1)"
                         >
-                            -
+                            −
                         </button>
-                        <input
-                            type="number"
-                            name="quantity"
-                            value="1"
-                            min="1"
-                            class="text-center w-20 border-0 text-xl"
-                            style=" -moz-appearance: textfield; -webkit-appearance: none; appearance: none;"
-                        />
+                        <!-- Отображение текущего количества -->
+                        <span id="currentQuantity" class="text-xl px-4 select-none">1</span>
+                        <!-- Кнопка увеличения количества -->
                         <button
-                            type="submit"
-                            name="quantity"
-                            value="increase"
-                            class="bg-gray-200 text-xl px-3 py-2 rounded-r-md hover:bg-gray-300"
+                            type="button"
+                            id="increaseQuantity"
+                            class="bg-gray-200 text-xl px-3 py-2 hover:bg-gray-300 transition-colors duration-200 focus:outline-none"
+                            aria-label="Увеличить количество"
+                            onclick="updateQuantity(1)"
                         >
                             +
                         </button>
-                    </form>
+                    </div>
 
                     <!-- Кнопка добавления в корзину -->
                     <form action="/cart/add/{{ $product->id }}" method="POST">
                         @csrf
-                        <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+                        <input type="hidden" name="quantity" id="quantityInput" value="1" />
+                        <button
+                            type="submit"
+                            class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 transform hover:scale-105"
+                        >
                             В корзину
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <!-- Дополнительное описание товара -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Описание товара</h2>
+            <p class="text-gray-600">{{ $product->description }}</p>
+        </div>
     </div>
 </section>
 
-<footer class="mt-12">
-    @include('partials.home.footer', [
-        'companyName' => 'Military Equipment Store',
-        'aboutText' => 'Мы специализируемся на продаже военной техники и оборудования.',
-        'contactEmail' => 'info@military-store.ru',
-    ])
-</footer>
+@include('partials.home.footer')
+
+<!-- Микроразметка Schema.org для товара -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ $product->name }}",
+    "description": "{{ $product->description }}",
+    "image": "{{ $product->image ? asset('storage/' . $product->image) : asset('images/default_product_image.jpg') }}",
+    "offers": {
+        "@type": "Offer",
+        "price": "{{ $product->price }}",
+        "priceCurrency": "RUB",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}
+</script>
+
+<!-- Скрипт для обновления количества и цены -->
+<script>
+    // Функция для обновления количества и цены
+    function updateQuantity(change) {
+        const quantityElement = document.getElementById('currentQuantity');
+        const quantityInput = document.getElementById('quantityInput');
+        const priceElement = document.getElementById('productPrice');
+        const availableQuantity = parseInt(document.getElementById('availableQuantity').textContent);
+        let currentQuantity = parseInt(quantityElement.textContent);
+
+        // Обновляем количество
+        currentQuantity += change;
+
+        // Проверяем, чтобы количество не было меньше 1 и больше доступного
+        if (currentQuantity < 1) currentQuantity = 1;
+        if (currentQuantity > availableQuantity) currentQuantity = availableQuantity;
+
+        // Обновляем отображаемое количество и скрытое поле
+        quantityElement.textContent = currentQuantity;
+        quantityInput.value = currentQuantity;
+
+        // Обновляем цену
+        const pricePerUnit = {{ $product->price }};
+        const totalPrice = pricePerUnit * currentQuantity;
+        priceElement.textContent = totalPrice.toLocaleString('ru-RU');
+    }
+</script>

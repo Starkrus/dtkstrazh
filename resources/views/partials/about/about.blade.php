@@ -68,10 +68,4 @@
     </div>
 </section>
 
-<footer class="mt-12">
-    @include('partials.home.footer', [
-        'companyName' => 'Military Equipment Store',
-        'aboutText' => 'Мы специализируемся на производстве и продаже высококачественных дульных тормозов-компенсаторов «Страж».',
-        'contactEmail' => 'info@military-store.ru',
-    ])
-</footer>
+@include('partials.home.footer')
