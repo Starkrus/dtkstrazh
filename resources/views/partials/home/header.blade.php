@@ -4,9 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'Производитель дульных тормозов-компенсаторов «Страж»')</title>
+    <meta name="description" content="Производство и продажа высококачественных дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ. Доставка по всей России.">
+    <meta name="keywords" content="дульные тормоза, компенсаторы, ДТК, АК-12, АК-74, СВД, Тигр, ПК/ПКМ, купить дульные тормоза, доставка по России">
+    <link rel="canonical" href="https://ваш-сайт.ru" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
+
+    <!-- Микроразметка Schema.org -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Производитель ДТКП «Страж»",
+            "description": "Производство дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ.",
+            "url": "https:/dtkstrazh.ru",
+            "logo": "https:/dtkstrazh.ru/build/images/logo.svg",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+7 (922) 186-86-46",
+                "contactType": "customer service",
+                "email": "dtkstrazh@mail.ru",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "ул. Примерная, д. 123",
+                    "addressLocality": "Екатеринбург",
+                    "postalCode": "620000",
+                    "addressCountry": "RU"
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -15,7 +43,7 @@
         <div class="flex items-center justify-between">
             <!-- Логотип и название компании -->
             <a href="/" class="flex items-center">
-                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-8">
+                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип компании «Страж» — производитель дульных тормозов-компенсаторов" class="w-8">
                 <span class="ml-1 text-2xl font-bold">{{ $companyName ?? 'Название компании' }}</span>
             </a>
 
@@ -29,8 +57,8 @@
                 <!-- Список телефонов (виден только на десктопе) -->
                 <div id="phoneNumbers" class="hidden md:block text-white">
                     <ul>
-                        <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
-                        <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
+                        <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
+                        <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,8 +123,8 @@
         <!-- Список телефонов (виден только на мобильной версии) -->
         <div id="mobilePhoneNumbers" class="hidden md:hidden bg-gray-800 text-white mt-2 p-4 rounded">
             <ul>
-                <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
-                <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
+                <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
+                <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
             </ul>
         </div>
     </div>

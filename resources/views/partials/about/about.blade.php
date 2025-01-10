@@ -12,12 +12,12 @@
         "name": "Производитель ДТКП «Страж»",
         "description": "Производство дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ.",
         "url": "https:/dtkstrazh.ru",
-        "logo": "https://dtkstrazh.ru/logo.png",
+        "logo": ""https:/dtkstrazh.ru/build/images/logo.svg"",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+7 (922) 186-86-46",
             "contactType": "customer service",
-            "email": "info@military-store.ru",
+            "email": "dtkstrazh@mail.ru",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "ул. Примерная, д. 123",
