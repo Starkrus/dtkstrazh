@@ -7,22 +7,6 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
-    <script>
-        // Отключение правой кнопки мыши
-        document.addEventListener('contextmenu', function (event) {
-            event.preventDefault();
-        });
-
-        // Отключение выделения текста
-        document.addEventListener('selectstart', function (event) {
-            event.preventDefault();
-        });
-
-        // Отключение перетаскивания
-        document.addEventListener('dragstart', function (event) {
-            event.preventDefault();
-        });
-    </script>
 </head>
 
 <body>
@@ -31,8 +15,8 @@
         <div class="flex items-center justify-between">
             <!-- Логотип и название компании -->
             <a href="/" class="flex items-center">
-                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-8 ">
-                <span class="ml-1 text-2xl font-bold">{{ $companyName ?? 'Название компании' }}</span> <!-- Название компании -->
+                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-8">
+                <span class="ml-1 text-2xl font-bold">{{ $companyName ?? 'Название компании' }}</span>
             </a>
 
             <div class="flex items-center space-x-4">
@@ -43,7 +27,7 @@
                 </div>
 
                 <!-- Список телефонов (виден только на десктопе) -->
-                <div id="phoneNumbers" class="hidden md:block text-white">
+                <div id="phoneNumbers" class="d-none d-md-block text-white">
                     <ul>
                         <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
                         <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
@@ -78,6 +62,13 @@
                     <img src="{{ asset('build/images/favourit.svg') }}" alt="Избранное" class="w-8 h-8">
                 </a>
 
+                <!-- Кнопка для телефонов (видна только на мобильной версии) -->
+                <button id="phoneToggle" class="md:hidden">
+                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                </button>
+
                 <!-- Кнопка мобильного меню -->
                 <button id="mobileMenuToggle" class="md:hidden">
                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,6 +87,14 @@
             <a href="/partnery" class="block py-2 hover:text-gray-300">Партнеры</a>
             <a href="/contacts" class="block py-2 hover:text-gray-300">Контакты</a>
         </div>
+
+        <!-- Список телефонов (виден только на мобильной версии) -->
+        <div id="mobilePhoneNumbers" class="hidden md:hidden bg-gray-800 text-white mt-2 p-4 rounded">
+            <ul>
+                <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (999) 123-45-67</a></li>
+                <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (999) 123-45-68</a></li>
+            </ul>
+        </div>
     </div>
 </header>
 
@@ -106,6 +105,15 @@
 
     mobileMenuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
+    });
+
+    // Скрипт для открытия/закрытия телефонов на мобильной версии
+    const phoneToggle = document.getElementById('phoneToggle');
+    const mobilePhoneNumbers = document.getElementById('mobilePhoneNumbers');
+
+    phoneToggle.addEventListener('click', () => {
+        console.log('Кнопка телефона нажата'); // Проверка
+        mobilePhoneNumbers.classList.toggle('hidden');
     });
 </script>
 </body>
