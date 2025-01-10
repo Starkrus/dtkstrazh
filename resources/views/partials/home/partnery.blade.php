@@ -27,10 +27,10 @@
             <!-- Партнер 4 (ссылка на просмотр других партнеров) -->
             <a href="/partners" class="flex-shrink-0 flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                 <!-- Иконка стрелки -->
-                <svg class="w-10 h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-10 h-10 text-black-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
-                <span class="text-lg font-semibold text-blue-600 text-center">Перейти к просмотру других партнеров</span>
+                <span class="text-lg font-semibold text-black text-center">Перейти к просмотру других партнеров</span>
             </a>
         </div>
     </div>
