@@ -19,7 +19,9 @@
     @include('partials.home.roducts')
 </section>
 
-
+<section class="mb-12 px-4 lg:px-0">
+    @include('partials.home.content')
+</section>
 
 <!-- Секция отзывов -->
 <section class="mb-12 px-4 lg:px-0">
