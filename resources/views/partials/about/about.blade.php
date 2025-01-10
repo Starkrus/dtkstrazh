@@ -11,18 +11,18 @@
         "@type": "Organization",
         "name": "Производитель ДТКП «Страж»",
         "description": "Производство дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ.",
-        "url": "https://ваш-сайт.ru",
-        "logo": "https://ваш-сайт.ru/logo.png",
+        "url": "https:/dtkstrazh.ru",
+        "logo": "https://dtkstrazh.ru/logo.png",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+7 (XXX) XXX-XX-XX",
+            "telephone": "+7 (922) 186-86-46",
             "contactType": "customer service",
             "email": "info@military-store.ru",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "ул. Примерная, д. 123",
-                "addressLocality": "Москва",
-                "postalCode": "123456",
+                "addressLocality": "Екатеринбург",
+                "postalCode": "620000",
                 "addressCountry": "RU"
             }
         }
@@ -31,7 +31,7 @@
 
 <section class="py-8">
     <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold mb-8">О компании</h1>
+        <h1 class="text-3xl font-bold mb-8">О нас</h1>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <p class="text-gray-700 mb-4">
@@ -60,9 +60,9 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-xl font-semibold mb-4">Контакты</h2>
             <div class="space-y-2 text-gray-600">
-                <p><strong>Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
-                <p><strong>Email:</strong> info@military-store.ru</p>
-                <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 123</p>
+                <p><strong>Телефон:</strong> +7 (922) 186-86-46</p>
+                <p><strong>Email:</strong> dtkstrazh@mail.ru</p>
+                <p><strong>Адрес:</strong> г. Екатеринбург</p>
             </div>
         </div>
     </div>
