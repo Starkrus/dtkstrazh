@@ -13,7 +13,7 @@
                 <div class="space-y-2">
                     <div class="flex items-center">
                         <span class="w-5 h-5 mr-2">📧</span>
-                        <span><a href="mailto:{{ $contactEmail ?? 'info@ваш-сайт.ru' }}" class="hover:text-gray-300">{{ $contactEmail ?? 'dtkstrazh@mail.ru' }}</a></span>
+                        <span><a href="mailto:{{ $contactEmail ?? 'dtkstrazh@mail.ru' }}" class="hover:text-gray-300">{{ $contactEmail ?? 'dtkstrazh@mail.ru' }}</a></span>
                     </div>
                     <div class="flex items-center">
                         <span class="w-5 h-5 mr-2">📞</span>
