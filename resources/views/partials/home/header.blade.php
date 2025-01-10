@@ -31,8 +31,8 @@
         <div class="flex items-center justify-between">
             <!-- Логотип и название компании -->
             <a href="/" class="flex items-center">
-                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-16 h-auto">
-                <span class="ml-2 text-2xl font-bold">{{ $companyName }}</span> <!-- Название компании -->
+                <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип" class="w-8 ">
+                <span class="ml-1 text-2xl font-bold">{{ $companyName ?? 'Название компании' }}</span> <!-- Название компании -->
             </a>
 
             <div class="flex items-center space-x-4">
@@ -66,7 +66,7 @@
                 <!-- Корзина -->
                 <a href="/cart" class="relative flex items-center">
                     <img src="{{ asset('build/images/cart.svg') }}" alt="Корзина" class="w-8 h-8">
-                    @if(count($cartItems) > 0)
+                    @if(isset($cartItems) && count($cartItems) > 0)
                         <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                             {{ count($cartItems) }}
                         </span>

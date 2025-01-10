@@ -1,10 +1,5 @@
-<link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
-<header class="mb-8">
-    @include('partials.home.header', [
-        'companyName' => 'Military Equipment Store',
-        'cartItems' => session('cart', []),
-    ])
-</header>
+
+@include('partials.home.header')
 <section class="py-8">
     <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold mb-8">О компании</h1>
