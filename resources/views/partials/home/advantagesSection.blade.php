@@ -1,4 +1,4 @@
-<div class="space-y-12">
+<div class="py-8 bg-gray-15">
     <section class="relative h-[500px]">
         <!-- Фоновое изображение с абсолютным позиционированием -->
         <img src="{{ asset('build/images/baner.jpg') }}" alt="Баннер" class="absolute inset-0 w-full h-full object-cover">
@@ -19,7 +19,7 @@
         </div>
     </section>
 
-    <section class="py-8 bg-gray-50">
+    <section class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-8">Наши преимущества</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="text-center space-y-4">
