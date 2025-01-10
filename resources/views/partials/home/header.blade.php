@@ -57,8 +57,8 @@
                 <!-- Список телефонов (виден только на десктопе) -->
                 <div id="phoneNumbers" class="hidden md:block text-white">
                     <ul>
-                        <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
-                        <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
+                        <li><a href="tel:+79221868646" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
+                        <li><a href="tel:+79498471022" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
                     </ul>
                 </div>
             </div>
@@ -123,8 +123,8 @@
         <!-- Список телефонов (виден только на мобильной версии) -->
         <div id="mobilePhoneNumbers" class="hidden md:hidden bg-gray-800 text-white mt-2 p-4 rounded">
             <ul>
-                <li><a href="tel:+79991234567" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
-                <li><a href="tel:+79991234568" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
+                <li><a href="tel:+79221868646" class="hover:text-gray-300">+7 (922) 186-86-46</a></li>
+                <li><a href="tel:+79498471022" class="hover:text-gray-300">+7 (949) 847-10-22</a></li>
             </ul>
         </div>
     </div>
