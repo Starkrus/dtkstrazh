@@ -19,6 +19,7 @@ Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->nam
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::view('/partnery', 'partials.partnery.partnery');
+Route::view('/favorites', 'partials.favorites.favorites');
 
 
 
