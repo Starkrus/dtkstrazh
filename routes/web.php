@@ -18,6 +18,7 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::view('/partnery', 'partials.partnery.partnery');
 
 
 
