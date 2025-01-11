@@ -46,7 +46,7 @@
                         Цена: <span id="productPrice">{{ number_format($product->price, 0, ',', ' ') }}</span> ₽
                     </div>
                     <div class="text-gray-600 mb-4">
-                        Количество на остатках: <span id="availableQuantity">{{ $product->quantity }}</span>
+                        Количество на складе: <span id="availableQuantity">{{ $product->quantity }}</span>
                     </div>
                 </div>
 

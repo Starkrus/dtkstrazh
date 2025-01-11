@@ -3,7 +3,7 @@
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
         <!-- Заголовок -->
-        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Каталог продукции</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Продукции</h1>
 
         <!-- Сетка с товарами -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
