@@ -122,6 +122,6 @@ class CartController extends Controller
     // Отправка уведомления на email
     private function sendToEmail($orderDetails)
     {
-        Mail::to('your_email@example.com')->send(new OrderNotification($orderDetails));
+        Mail::to('dtkstrazh@mail.ru')->send(new OrderNotification($orderDetails));
     }
 }
