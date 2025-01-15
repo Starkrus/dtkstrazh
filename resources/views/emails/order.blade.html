@@ -1,0 +1,13 @@
+<h1>Новый заказ</h1>
+<p><strong>Имя:</strong> {{ $orderDetails['name'] }}</p>
+<p><strong>Телефон:</strong> {{ $orderDetails['phone'] }}</p>
+<p><strong>Email:</strong> {{ $orderDetails['email'] }}</p>
+<h2>Список товаров:</h2>
+<ul>
+    @foreach ($orderDetails['products'] as $item)
+    <li>
+        {{ $item['product']->name }} (x{{ $item['quantity'] }}) - {{ number_format($item['product']->price * $item['quantity'], 0, ',', ' ') }} ₽
+    </li>
+    @endforeach
+</ul>
+<p><strong>Итого:</strong> {{ number_format($orderDetails['total'], 0, ',', ' ') }} ₽</p>
