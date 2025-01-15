@@ -25,22 +25,31 @@
                     <h2 class="text-2xl font-bold mb-4">Ваш заказ</h2>
                     <div class="space-y-4">
                         @foreach($cart as $item)
-                            <div class="bg-white p-4 rounded-lg shadow-md">
-                                <div class="flex items-center space-x-4">
-                                    <img src="{{ asset($item['product']['image']) }}" alt="{{ $item['product']['name'] }}" class="w-20 h-20 object-cover rounded">
-                                    <div class="flex-1">
-                                        <h3 class="font-semibold">{{ $item['product']['name'] }}</h3>
-                                        <p class="text-gray-600">Количество: {{ $item['quantity'] }}</p>
+                            @if(isset($item['product']))
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="{{ $item['product']->image ? asset('storage/' . $item['product']->image) : asset('images/default_product_image.jpg') }}"
+                                             alt="{{ $item['product']->name }}"
+                                             class="w-20 h-20 object-cover rounded">
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold">{{ $item['product']->name }}</h3>
+                                            <p class="text-gray-600">Количество: {{ $item['quantity'] }}</p>
+                                            <p class="text-gray-800 font-bold">{{ number_format($item['product']->price * $item['quantity'], 0, ',', ' ') }} ₽</p>
+                                        </div>
+                                        <form action="{{ route('cart.remove', $item['product']->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">Удалить</button>
+                                        </form>
                                     </div>
-                                    <form action="{{ route('cart.remove', $item['product']['id']) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="text-red-600 hover:text-red-800">Удалить</button>
-                                    </form>
                                 </div>
-                            </div>
+                            @else
+                                <div class="bg-red-100 text-red-800 p-4 mb-6 rounded">
+                                    Ошибка: продукт не найден.
+                                </div>
+                            @endif
                         @endforeach
                     </div>
-                </div>
 
                 <div>
                     <h2 class="text-2xl font-bold mb-4">Оформление заказа</h2>

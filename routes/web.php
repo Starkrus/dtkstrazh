@@ -20,6 +20,10 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::view('/partnery', 'partials.partnery.partnery');
 Route::view('/favorites', 'partials.favorites.favorites');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 
 

@@ -2,72 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Weapon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
-    public function index()
+    // Добавить товар в корзину
+    public function add(Request $request, $id)
     {
-        // Пример данных корзины
-        $cart = session('cart', [
-            [
-                'product' => ['id' => 1, 'name' => 'Товар 1', 'image' => 'images/product1.jpg'],
-                'quantity' => 2,
-            ],
-            [
-                'product' => ['id' => 2, 'name' => 'Товар 2', 'image' => 'images/product2.jpg'],
-                'quantity' => 1,
-            ],
+        $quantity = $request->input('quantity', 1); // По умолчанию 1
+
+        $request->validate([
+            'quantity' => 'integer|min:1',
         ]);
 
+        $product = Weapon::findOrFail($id);
+
+        if ($product->quantity < $quantity) {
+            return redirect()->back()->withErrors(['error' => 'Недостаточно товара на складе']);
+        }
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            // Если товар уже есть в корзине, увеличиваем его количество
+            $cart[$id]['quantity'] += $quantity;
+        } else {
+            // Добавляем новый товар
+            $cart[$id] = [
+                'product' => $product,
+                'quantity' => $quantity,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart.index')->with('success', 'Товар добавлен в корзину');
+    }
+
+
+    // Отображение корзины
+    public function index()
+    {
+        $cart = session()->get('cart', []);
         return view('partials.home.cart', compact('cart'));
     }
 
-    public function removeFromCart($productId)
+    // Удаление товара из корзины
+    public function remove($id)
     {
-        $cart = session('cart', []);
-        $cart = array_filter($cart, fn($item) => $item['product']['id'] !== (int) $productId);
-
-        session(['cart' => $cart]);
-
-        return redirect()->route('cart.index')->with('success', 'Товар удалён из корзины.');
-    }
-
-    public function checkout(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
-        ]);
-
-        $cart = session('cart', []);
-
-        // Формируем текст заказа
-        $orderDetails = collect($cart)->map(fn($item) => "{$item['product']['name']} ({$item['quantity']} шт.)")->join("\n");
-
-        // Отправка Email
-        Mail::raw(
-            "Имя: {$request->name}\nEmail: {$request->email}\nТелефон: {$request->phone}\n\nЗаказ:\n$orderDetails",
-            fn($message) => $message->to(env('ORDER_EMAIL'))->subject('Новый заказ')
-        );
-
-        // Отправка в Telegram
-        if (env('TELEGRAM_BOT_TOKEN') && env('TELEGRAM_CHAT_ID')) {
-            $telegramMessage = "Новый заказ!\n\nИмя: {$request->name}\nEmail: {$request->email}\nТелефон: {$request->phone}\n\nЗаказ:\n$orderDetails";
-
-            $telegramUrl = "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage";
-
-            $ch = curl_init($telegramUrl);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['chat_id' => env('TELEGRAM_CHAT_ID'), 'text' => $telegramMessage]));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            curl_exec($ch);
-            curl_close($ch);
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Ваш заказ отправлен!');
+        return redirect()->route('cart.index')->with('success', 'Товар удалён из корзины');
     }
 }
-

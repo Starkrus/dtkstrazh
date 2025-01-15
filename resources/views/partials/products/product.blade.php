@@ -44,6 +44,7 @@
                                     В корзину
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 </div>
