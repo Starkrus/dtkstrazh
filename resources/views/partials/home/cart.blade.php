@@ -69,7 +69,7 @@
                 <form action="{{ route('cart.checkout') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md space-y-4">
                     @csrf
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Ваше имя</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ваше имя / Компания</label>
                         <input type="text" name="name" required class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
                     </div>
 
