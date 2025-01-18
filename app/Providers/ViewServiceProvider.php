@@ -23,6 +23,8 @@ class ViewServiceProvider extends ServiceProvider
         // Передаем переменную $companyName во все представления
         View::composer('*', function ($view) {
             $view->with('companyName', 'Страж');
+            $cartItems = session('cart', []);
+            $view->with('cartItems', $cartItems);
         });
     }
 }
