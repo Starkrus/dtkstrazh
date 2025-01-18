@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- О компании -->
             <div>
-                <h3 class="text-xl font-bold mb-4">{{ $companyName ?? 'Название компании' }}</h3>
-                <p class="text-gray-400">{{ $aboutText ?? 'Мы — производители высококачественных дульных тормозов-компенсаторов «Страж». Наша продукция подходит для АК-12, АК-74, СВД, Тигр, ПК/ПКМ.' }}</p>
+                <h3 class="text-xl font-bold mb-4">{{ $companyName }}</h3>
+                <p class="text-gray-400">{{ $aboutText }}</p>
             </div>
 
             <!-- Контакты -->
