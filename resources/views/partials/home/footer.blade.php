@@ -25,7 +25,11 @@
                     </div>
                     <div class="flex items-center">
                         <span class="w-5 h-5 mr-2">📍</span>
-                        <span>г. Екатеринбург</span>
+                        <span>г. Екатеринбург, ул. Евгения савкова, д. 33а</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-5 h-5 mr-2">📍</span>
+                        <span>г. Донецк, ул. Куйбышева, д, 229</span>
                     </div>
                 </div>
             </div>
@@ -45,7 +49,7 @@
 
         <!-- Копирайт и ссылки -->
         <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p>© {{ date('Y') }} {{ $companyName ?? 'Название компании' }}. Все права защищены.</p>
+            <p>© {{ date('Y') }} {{ $companyName }}. Все права защищены.</p>
             <div class="mt-4">
                 <a href="/privacy-policy" class="hover:text-gray-300">Политика конфиденциальности</a> |
                 <a href="/terms-of-use" class="hover:text-gray-300">Пользовательское соглашение</a>

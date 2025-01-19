@@ -44,7 +44,7 @@
             <!-- Логотип и название компании -->
             <a href="/" class="flex items-center">
                 <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип компании «Страж» — производитель дульных тормозов-компенсаторов" class="w-8">
-                <span class="ml-1 text-2xl font-bold">{{ $companyName ?? 'Название компании' }}</span>
+                <span class="ml-1 text-2xl font-bold">{{ $companyName }}</span>
             </a>
 
             <div class="flex items-center space-x-4">
