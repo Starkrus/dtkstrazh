@@ -7,7 +7,7 @@
     <title>@yield('title', 'Производитель дульных тормозов-компенсаторов «Страж»')</title>
     <meta name="description" content="Производство и продажа высококачественных дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ. Доставка по всей России.">
     <meta name="keywords" content="дульные тормоза, компенсаторы, ДТК, АК-12, АК-74, СВД, Тигр, ПК/ПКМ, купить дульные тормоза, доставка по России">
-    <link rel="canonical" href="https://ваш-сайт.ru" />
+    <link rel="canonical" href="https://dtkstrazh.ru"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
 
