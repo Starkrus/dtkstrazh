@@ -2,7 +2,7 @@
     <!-- Секция с баннером -->
     <section class="relative h-[500px]">
         <!-- Фоновое изображение с абсолютным позиционированием -->
-        <img src="{{ asset('build/images/baner.jpg') }}" alt="Баннер" class="absolute inset-0 w-full h-full object-cover">
+        <img src="{{ asset('build/images/baner.jpeg') }}" alt="Баннер" class="absolute inset-0 w-full h-full object-cover">
 
         <!-- Затемнение фона -->
         <div class="absolute inset-0 bg-black/50"></div>
