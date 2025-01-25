@@ -1,8 +1,5 @@
 @include('partials.home.header')
 
-{{-- Мета-теги для SEO --}}
-@section('title', 'Оформление заказа | Производитель дульных тормозов-компенсаторов «Страж»')
-@section('description', 'Оформите заказ на дульные тормоза-компенсаторы «Страж» для АК-12, АК-74, СВД, Тигр, ПК/ПКМ. Быстрое подтверждение и доставка по России.')
 
 {{-- Микроразметка Schema.org --}}
 <script type="application/ld+json">
@@ -28,7 +25,7 @@
                     <div class="text-2xl font-bold text-primary mb-2">1</div>
                     <h3 class="text-lg font-semibold mb-2">Выбор товаров</h3>
                     <p class="text-gray-600 text-sm">
-                        Добавьте нужные ДТК в корзину из каталога
+                        Добавьте нужный товар в корзину из каталога
                     </p>
                 </div>
 
