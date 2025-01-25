@@ -42,7 +42,9 @@
                     <li><a href="/product" class="hover:text-gray-300">Продукция</a></li>
                     <li><a href="/about" class="hover:text-gray-300">О нас</a></li>
                     <li><a href="/certificates" class="hover:text-gray-300">Сертификаты</a></li>
+                    <li><a href="/partnery" class="hover:text-gray-300">Партнеры</a></li>
                     <li><a href="/contacts" class="hover:text-gray-300">Контакты</a></li>
+                    <li><a href="/delivery" class="hover:text-gray-300">Доставка и оплата</li>
                 </ul>
             </div>
         </div>

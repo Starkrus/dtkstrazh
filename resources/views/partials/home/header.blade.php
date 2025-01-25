@@ -71,7 +71,7 @@
                 <a href="/certificates" class="hover:text-gray-300">Сертификаты</a>
                 <a href="/partnery" class="hover:text-gray-300">Партнеры</a>
                 <a href="/contacts" class="hover:text-gray-300">Контакты</a>
-                <a href="/delivery" class="hover:text-gray-300">Доставка и полата</a>
+                <a href="/delivery" class="hover:text-gray-300">Доставка и оплата</a>
             </nav>
 
             <!-- Корзина, избранное и мобильное меню -->
@@ -119,7 +119,7 @@
             <a href="/certificates" class="block py-2 hover:text-gray-300">Сертификаты</a>
             <a href="/partnery" class="block py-2 hover:text-gray-300">Партнеры</a>
             <a href="/contacts" class="block py-2 hover:text-gray-300">Контакты</a>
-            <a href="/delivery" class="hover:text-gray-300">Доставка и полата</a>
+            <a href="/delivery" class="hover:text-gray-300">Доставка и оплата</a>
         </div>
 
         <!-- Список телефонов (виден только на мобильной версии) -->
