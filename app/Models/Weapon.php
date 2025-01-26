@@ -25,6 +25,8 @@ class Weapon extends Model
         'coating',
         'description',
         'image',
+        'price',
+        'quantity',
     ];
 
     // Если используете временные метки (created_at, updated_at)

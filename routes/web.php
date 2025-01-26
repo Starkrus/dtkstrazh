@@ -26,6 +26,9 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('car
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::view('/delivery', 'partials.delivery.delivery');
 
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
 
 Route::get('/', function () {

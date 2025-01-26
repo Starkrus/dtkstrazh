@@ -41,11 +41,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->badge(fn () => 6),
 
             Menu::make('Товар')
-                ->icon('bs.collection')
+                ->icon('bag')
                 ->route('platform.product'),
 
             Menu::make('Заказы')
-                ->icon('bs.collection')
+                ->icon('basket')
                 ->route('platform.example'),
 
             Menu::make('SEO')

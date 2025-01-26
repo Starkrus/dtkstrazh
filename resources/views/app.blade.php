@@ -1,6 +1,5 @@
 @include('partials.home.header')
 
-
 <!-- Секция преимуществ -->
 <section class="mb-12">
     @include('partials.home.advantagesSection')

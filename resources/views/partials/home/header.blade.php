@@ -7,8 +7,11 @@
     <title>@yield('title', 'Производитель дульных тормозов-компенсаторов «Страж»')</title>
     <meta name="description" content="Производство и продажа высококачественных дульных тормозов-компенсаторов для АК-12, АК-74, СВД, Тигр, ПК/ПКМ. Доставка по всей России.">
     <meta name="keywords" content="дульные тормоза, компенсаторы, ДТК, АК-12, АК-74, СВД, Тигр, ПК/ПКМ, купить дульные тормоза, доставка по России">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="canonical" href="https://dtkstrazh.ru"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" crossorigin href="{{ asset('build/assets/index-BmFAR0QE.css') }}">
 
     <!-- Микроразметка Schema.org -->
