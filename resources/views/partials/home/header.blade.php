@@ -42,9 +42,9 @@
     <div class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
             <!-- Логотип и название компании -->
-            <a href="/" class="flex items-center">
+            <a href="/" class="flex items-center gap-4">
                 <img src="{{ asset('build/images/logo.svg') }}" alt="Логотип компании «Страж» — производитель дульных тормозов-компенсаторов" class="w-8">
-                <span class="ml-1 text-2xl font-bold">{{ $companyName }}</span>
+                <span class="text-2xl font-bold">{{ $companyName }}</span>
             </a>
 
             <div class="flex items-center space-x-4">
@@ -147,6 +147,31 @@
 
     phoneToggle.addEventListener('click', () => {
         mobilePhoneNumbers.classList.toggle('hidden');
+    });
+
+    // Запрет выделения текста
+    document.addEventListener('selectstart', function(event) {
+        event.preventDefault();
+    });
+
+    // Запрет копирования текста
+    document.addEventListener('copy', function(event) {
+        event.preventDefault();
+        alert('Копирование текста запрещено!');
+    });
+
+    // Запрет контекстного меню (правой кнопки мыши)
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+        alert('Контекстное меню отключено!');
+    });
+
+    // Запрет перетаскивания изображений
+    document.addEventListener('dragstart', function(event) {
+        if (event.target.tagName === 'IMG') {
+            event.preventDefault();
+            alert('Копирование изображений запрещено!');
+        }
     });
 </script>
 </body>

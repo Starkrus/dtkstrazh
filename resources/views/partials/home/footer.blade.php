@@ -53,7 +53,7 @@
                 <!-- Подписка -->
                 <div>
                     <h3 class="text-xl font-bold mb-4">Подписаться</h3>
-                    <p class="text-gray-400 mb-4">Будьте в курсе новостей и акций:</p>
+                    <p class="text-gray-400 mb-4">Будьте в курсе новостей:</p>
                     <form action="/subscribe" method="POST" class="flex flex-col gap-3">
                         @csrf
                         <input

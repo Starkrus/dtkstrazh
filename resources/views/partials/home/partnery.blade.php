@@ -49,7 +49,7 @@
             @endforeach
 
             <!-- Show All CTA -->
-            <a href="/vse-filialy"
+            <a href="/partnery"
                class="flex-shrink-0 flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group">
                 <div class="flex flex-col items-center justify-center h-full">
                     <div class="mb-3 transform group-hover:translate-x-1 transition-transform">
