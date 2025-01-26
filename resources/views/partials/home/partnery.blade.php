@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Heading -->
         <h2 id="branches-heading" class="text-3xl font-extrabold text-gray-900 text-center mb-10">
-            Наши филиалы
+            Наши партнеры
         </h2>
 
         <!-- Cards Container -->
@@ -64,7 +64,7 @@
                         </svg>
                     </div>
                     <span class="text-base font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">
-                        Все филиалы
+                        Все партнеры
                     </span>
                 </div>
             </a>
