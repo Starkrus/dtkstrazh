@@ -20,7 +20,7 @@
                 <tr data-product-id="{{ $product->id }}">
                     <td>
                         @if ($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="50" height="50">
+                            <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}" width="200" height="100">
                         @else
                             <span class="text-muted">Нет изображения</span>
                         @endif
@@ -55,7 +55,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Форма редактирования -->
-                                <form id="editForm-{{ $product->id }}" method="POST" action="{{ route('products.update', $product->id) }}">
+                                <form id="editForm-{{ $product->id }}" method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
@@ -166,7 +166,6 @@
                     alert('Произошла ошибка при отправке данных.');
                 });
         }
-
         function updateProductRow(productId, productData) {
             const row = document.querySelector(`tr[data-product-id="${productId}"]`);
             if (row) {
@@ -177,7 +176,7 @@
                 // Обновляем изображение
                 const imageCell = row.querySelector('td img');
                 if (imageCell) {
-                    imageCell.src = productData.image ? `{{ asset('storage/products') }}/${productData.image}` : '';
+                    imageCell.src = productData.image ? `{{ asset('storage') }}/${productData.image}` : '';
                 }
             }
         }

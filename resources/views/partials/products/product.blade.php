@@ -10,10 +10,8 @@
             @foreach ($products as $product)
                 <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 overflow-hidden">
                     <!-- Изображение товара -->
-                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/default_product_image.jpg') }}"
-                         alt="{{ $product->name }}"
-                         class="w-full h-48 object-cover"
-                         loading="lazy" />
+                    <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}">
+
 
                     <!-- Контент карточки -->
                     <div class="p-6">

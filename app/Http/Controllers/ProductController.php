@@ -21,6 +21,15 @@ class ProductController extends Controller
     }
 
     /**
+     * Отображение деталей продукта
+     */
+    public function show($id)
+    {
+        $product = Weapon::findOrFail($id);
+        return view('partials.products.productCard', compact('product'));
+    }
+
+    /**
      * Обновление данных продукта
      */
     public function update(Request $request, $id)
@@ -38,13 +47,13 @@ class ProductController extends Controller
         // Обработка загрузки изображения
         if ($request->hasFile('image')) {
             // Удаляем старое изображение, если оно есть
-            if ($product->image && Storage::exists($product->image)) {
-                Storage::delete($product->image);
+            if ($product->image && Storage::exists('public/' . $product->image)) {
+                Storage::delete('public/' . $product->image);
             }
 
             // Сохраняем новое изображение
             $imagePath = $request->file('image')->store('public/products');
-            $validated['image'] = str_replace('public/', '', $imagePath);
+            $validated['image'] = str_replace('public/', '', $imagePath); // сохраняем путь без префикса "public/"
         }
 
         // Обновляем продукт
@@ -65,8 +74,8 @@ class ProductController extends Controller
         $product = Weapon::findOrFail($id);
 
         // Удаляем изображение, если оно есть
-        if ($product->image && Storage::exists($product->image)) {
-            Storage::delete($product->image);
+        if ($product->image && Storage::exists('public/' . $product->image)) {
+            Storage::delete('public/' . $product->image);
         }
 
         $product->delete();

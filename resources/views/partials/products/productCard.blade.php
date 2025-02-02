@@ -9,12 +9,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Изображение товара -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img
-                    src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/default_product_image.jpg') }}"
-                    alt="{{ $product->name }}"
-                    class="w-full h-96 object-cover"
-                    loading="lazy"
-                />
+                <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}">
             </div>
 
             <!-- Описание товара -->
