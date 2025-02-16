@@ -4,8 +4,6 @@
 
 @section('content')
     <div class="container">
-
-
         <!-- Таблица с товарами -->
         <table class="table table-bordered">
             <thead>
