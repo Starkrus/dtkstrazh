@@ -4,6 +4,12 @@
 
 @section('content')
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success my-3">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <!-- Таблица с товарами -->
         <table class="table table-bordered">
             <thead>
@@ -29,12 +35,12 @@
                     <td class="product-price">{{ $product->price }} ₽</td>
                     <td class="product-quantity">{{ $product->quantity }}</td>
                     <td>
-                        <!-- Кнопка для открытия модального окна -->
+                        <!-- Кнопка для открытия модального окна редактирования -->
                         <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#productModal-{{ $product->id }}">
                             Просмотр
                         </button>
 
-                        <!-- Кнопка удаления -->
+                        <!-- Форма удаления -->
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
@@ -45,7 +51,7 @@
                     </td>
                 </tr>
 
-                <!-- Модальное окно -->
+                <!-- Модальное окно редактирования товара -->
                 <div class="modal fade" id="productModal-{{ $product->id }}" tabindex="-1" aria-labelledby="productModalLabel-{{ $product->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -54,7 +60,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <!-- Форма редактирования -->
+                                <!-- Форма редактирования товара -->
                                 <form id="editForm-{{ $product->id }}" method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -68,80 +74,68 @@
                                         </div>
                                         <div class="col-md-8">
                                             <!-- Название -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="name-{{ $product->id }}">Название</label>
                                                 <input type="text" name="name" id="name-{{ $product->id }}" class="form-control" value="{{ $product->name }}" required>
                                             </div>
-
                                             <!-- Калибр -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="caliber-{{ $product->id }}">Калибр</label>
                                                 <input type="text" name="caliber" id="caliber-{{ $product->id }}" class="form-control" value="{{ $product->caliber }}" required>
                                             </div>
-
                                             <!-- Тип крепления -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="mount_type-{{ $product->id }}">Тип крепления</label>
                                                 <input type="text" name="mount_type" id="mount_type-{{ $product->id }}" class="form-control" value="{{ $product->mount_type }}" required>
                                             </div>
-
                                             <!-- Материал корпуса -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="body_material-{{ $product->id }}">Материал корпуса</label>
                                                 <input type="text" name="body_material" id="body_material-{{ $product->id }}" class="form-control" value="{{ $product->body_material }}" required>
                                             </div>
-
                                             <!-- Материал первой камеры -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="first_chamber_material-{{ $product->id }}">Материал первой камеры</label>
                                                 <input type="text" name="first_chamber_material" id="first_chamber_material-{{ $product->id }}" class="form-control" value="{{ $product->first_chamber_material }}" required>
                                             </div>
-
                                             <!-- Количество камер -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="chamber_count-{{ $product->id }}">Количество камер</label>
                                                 <input type="number" name="chamber_count" id="chamber_count-{{ $product->id }}" class="form-control" value="{{ $product->chamber_count }}" required>
                                             </div>
-
                                             <!-- Снижение звукового давления -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="sound_reduction-{{ $product->id }}">Снижение звукового давления</label>
                                                 <input type="text" name="sound_reduction" id="sound_reduction-{{ $product->id }}" class="form-control" value="{{ $product->sound_reduction }}" required>
                                             </div>
-
                                             <!-- Ресурс -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="lifespan-{{ $product->id }}">Ресурс</label>
                                                 <input type="text" name="lifespan" id="lifespan-{{ $product->id }}" class="form-control" value="{{ $product->lifespan }}" required>
                                             </div>
-
                                             <!-- Покрытие -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="coating-{{ $product->id }}">Покрытие</label>
                                                 <input type="text" name="coating" id="coating-{{ $product->id }}" class="form-control" value="{{ $product->coating }}" required>
                                             </div>
-
                                             <!-- Описание -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="description-{{ $product->id }}">Описание</label>
                                                 <textarea name="description" id="description-{{ $product->id }}" class="form-control">{{ $product->description }}</textarea>
                                             </div>
-
                                             <!-- Цена -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="price-{{ $product->id }}">Цена</label>
                                                 <input type="number" name="price" id="price-{{ $product->id }}" class="form-control" value="{{ $product->price }}" step="0.01" required>
                                             </div>
-
                                             <!-- Количество -->
-                                            <div class="form-group">
+                                            <div class="form-group mb-2">
                                                 <label for="quantity-{{ $product->id }}">Количество</label>
                                                 <input type="number" name="quantity" id="quantity-{{ $product->id }}" class="form-control" value="{{ $product->quantity }}" required>
                                             </div>
-
-                                            <!-- Изображение -->
-                                            <div class="form-group">
-                                                <label for="image-{{ $product->id }}">Изображение</label>
+                                            <!-- Новое изображение -->
+                                            <div class="form-group mb-2">
+                                                <label for="image-{{ $product->id }}">Новое изображение</label>
                                                 <input type="file" name="image" id="image-{{ $product->id }}" class="form-control">
                                             </div>
                                         </div>
@@ -149,9 +143,9 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <!-- Кнопка для сохранения изменений -->
+                                <!-- Кнопка сохранения изменений -->
                                 <button type="button" class="btn btn-primary" onclick="saveChanges({{ $product->id }})">Сохранить</button>
-                                <!-- Кнопка закрытия -->
+                                <!-- Кнопка закрытия модального окна -->
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                             </div>
                         </div>
@@ -174,8 +168,6 @@
             }
 
             const formData = new FormData(form);
-
-            // CSRF-токен
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
             if (!csrfToken) {
                 console.error('CSRF-токен не найден.');
@@ -198,24 +190,16 @@
                 })
                 .then(data => {
                     if (data.success) {
-                        // Обновляем данные в таблице
                         updateProductRow(productId, data.product);
-
-                        // Закрываем модальное окно вручную
+                        // Закрываем модальное окно
                         const modal = document.getElementById(`productModal-${productId}`);
                         if (modal) {
-                            modal.classList.remove('show');
-                            modal.style.display = 'none';
-
-                            // Удаляем затемнение (backdrop)
-                            const backdrop = document.querySelector('.modal-backdrop');
-                            if (backdrop) {
-                                backdrop.remove();
+                            // Если экземпляр модального окна еще не создан, создаем его
+                            let modalInstance = bootstrap.Modal.getInstance(modal);
+                            if (!modalInstance) {
+                                modalInstance = new bootstrap.Modal(modal);
                             }
-
-                            // Убираем блокировку прокрутки
-                            document.body.classList.remove('modal-open');
-                            document.body.style.overflow = '';
+                            modalInstance.hide();
                         }
                     } else {
                         alert(data.message || 'Ошибка при обновлении.');
@@ -226,17 +210,16 @@
                     alert('Произошла ошибка при отправке данных.');
                 });
         }
+
         function updateProductRow(productId, productData) {
             const row = document.querySelector(`tr[data-product-id="${productId}"]`);
             if (row) {
                 row.querySelector('.product-name').textContent = productData.name;
                 row.querySelector('.product-price').textContent = `${productData.price} ₽`;
                 row.querySelector('.product-quantity').textContent = productData.quantity;
-
-                // Обновляем изображение
-                const imageCell = row.querySelector('td img');
-                if (imageCell) {
-                    imageCell.src = productData.image ? `{{ asset('storage') }}/${productData.image}` : '';
+                const img = row.querySelector('td img');
+                if (img) {
+                    img.src = productData.image ? `{{ asset('storage') }}/${productData.image}` : '';
                 }
             }
         }

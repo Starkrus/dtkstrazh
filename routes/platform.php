@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\ProductScreen;
 
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -101,7 +102,10 @@ Route::screen('/examples/layouts', ExampleLayoutsScreen::class)->name('platform.
 Route::screen('/examples/grid', ExampleGridScreen::class)->name('platform.example.grid');
 Route::screen('/examples/charts', ExampleChartsScreen::class)->name('platform.example.charts');
 Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.example.cards');
-Route::screen('product', ProductScreen::class)->name('platform.product');
+
+Route::screen('products', ProductScreen::class)
+    ->name('platform.products');
+
 
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 class Weapon extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource;
 
     // Указываем, что модель работает с таблицей 'weapons'
     protected $table = 'weapons';

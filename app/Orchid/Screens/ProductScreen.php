@@ -11,6 +11,7 @@ use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Actions\Menu;
+use Orchid\Screen\Actions\ModalToggle;  // Подключаем ModalToggle для открытия модального окна
 
 class ProductScreen extends Screen
 {
@@ -42,6 +43,9 @@ class ProductScreen extends Screen
     public function layout(): array
     {
         return [
+            // Ваш основной экран с таблицей товаров
+            Layout::view('platform.products'),
+
             // Модальное окно для добавления товара
             Layout::modal('addProductModal', [
                 Layout::rows([
@@ -68,9 +72,6 @@ class ProductScreen extends Screen
             ])
                 ->title('Добавить новый товар') // Заголовок модального окна
                 ->size(Modal::SIZE_LG), // Размер модального окна
-
-            // Ваш основной экран с таблицей товаров
-            Layout::view('platform.products')
         ];
     }
 
@@ -102,6 +103,22 @@ class ProductScreen extends Screen
                 ->icon('plus')
                 ->modal('addProductModal') // Модальное окно для добавления товара
                 ->class('btn btn-success')
+        ];
+    }
+
+    /**
+     * Кнопка для открытия модального окна "Добавить товар"
+     *
+     * @return array
+     */
+    public function commandBar(): array
+    {
+        return [
+            // Кнопка "Добавить товар" открывает модальное окно создания
+            ModalToggle::make('Добавить товар')
+                ->modal('addProductModal')  // Указываем название модального окна
+                ->icon('bs.plus-circle')
+                ->method('store') // Метод, который будет вызываться при отправке формы
         ];
     }
 
