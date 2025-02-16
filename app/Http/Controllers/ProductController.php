@@ -39,6 +39,15 @@ class ProductController extends Controller
         // Валидация данных
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'caliber' => 'required|string|max:255',
+            'mount_type' => 'required|string|max:255',
+            'body_material' => 'required|string|max:255',
+            'first_chamber_material' => 'required|string|max:255',
+            'chamber_count' => 'required|integer|min:0',
+            'sound_reduction' => 'required|string|max:255',
+            'lifespan' => 'required|string|max:255',
+            'coating' => 'required|string|max:255',
+            'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Валидация изображения

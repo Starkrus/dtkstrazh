@@ -2736,16 +2736,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.44.1",
+            "version": "14.45.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4"
+                "reference": "b7c46bbc38f10ba59c27c1555856b347f80b374c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/130e1aea00bc08f44715b6f08065e591ead9eed4",
-                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b7c46bbc38f10ba59c27c1555856b347f80b374c",
+                "reference": "b7c46bbc38f10ba59c27c1555856b347f80b374c",
                 "shasum": ""
             },
             "require": {
@@ -2759,7 +2759,7 @@
                 "watson/active": "^7.0"
             },
             "conflict": {
-                "laravel/framework": "<10.48.8",
+                "laravel/framework": "<=10.48.25, <=11.34.0",
                 "nesbot/carbon": "<2.66.0",
                 "orchestra/testbench-core": "<8.23.9"
             },
@@ -2839,7 +2839,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-11-26T14:45:49+00:00"
+            "time": "2025-02-05T14:12:30+00:00"
         },
         {
             "name": "phpoption/phpoption",
