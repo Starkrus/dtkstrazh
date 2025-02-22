@@ -20,6 +20,7 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\ProductScreen;
+use App\Orchid\Screens\OrderListScreen;
 
 
 /*
@@ -106,6 +107,6 @@ Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.exam
 Route::screen('products', ProductScreen::class)
     ->name('platform.products');
 
-
+Route::screen('orders', OrderListScreen::class)->name('platform.order.list');
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

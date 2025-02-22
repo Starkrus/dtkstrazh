@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Orchid\Screens\ProductScreen;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Models\Order;
+use Illuminate\Http\Request;
 
 
 Route::view('/certificates', 'partials.certificates.certificates');
@@ -29,6 +31,10 @@ Route::view('/delivery', 'partials.delivery.delivery');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::post('/platform/orders/delete', function (Request $request) {
+    Order::findOrFail($request->id)->delete();
+    return response()->json(['success' => true]);
+});
 
 
 Route::get('/', function () {

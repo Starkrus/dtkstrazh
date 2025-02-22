@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderNotification;
+use App\Models\Order;
 use App\Models\Weapon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -28,10 +29,8 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
-            // Если товар уже есть в корзине, увеличиваем его количество
             $cart[$id]['quantity'] += $quantity;
         } else {
-            // Добавляем новый товар
             $cart[$id] = [
                 'product' => $product,
                 'quantity' => $quantity,
@@ -71,22 +70,26 @@ class CartController extends Controller
             'phone' => 'required|string',
         ]);
 
-        // Данные заказа
-        $orderDetails = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'products' => session('cart', []),
-            'total' => collect(session('cart', []))->sum(function ($item) {
-                return $item['product']->price * $item['quantity'];
-            }),
-        ];
+        $cart = session('cart', []);
 
-        // Отправка уведомления в Telegram
-        $this->sendToTelegram($orderDetails);
+        $total = collect($cart)->sum(function ($item) {
+            return $item['product']->price * $item['quantity'];
+        });
 
-        // Отправка уведомления на email
-        $this->sendToEmail($orderDetails);
+        // Сохраняем заказ в БД
+        $order = Order::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'total' => $total,
+            'status' => 'new', // Новый заказ
+            'comment' => '',
+            'items' => $cart, // Сохраняем товары в JSON
+        ]);
+
+        // Отправка уведомлений
+        $this->sendToTelegram($order);
+        $this->sendToEmail($order);
 
         // Очистка корзины после оформления заказа
         session()->forget('cart');
@@ -95,23 +98,24 @@ class CartController extends Controller
     }
 
     // Отправка уведомления в Telegram
-    private function sendToTelegram($orderDetails)
+    private function sendToTelegram(Order $order)
     {
         $token = env('TELEGRAM_BOT_TOKEN');
         $chatId = env('TELEGRAM_CHAT_ID');
 
-        $message = "Новый заказ:\n\n" .
-            "Имя: {$orderDetails['name']}\n" .
-            "Телефон: {$orderDetails['phone']}\n" .
-            "Email: {$orderDetails['email']}\n" .
-            "Список товаров:\n";
+        $message = "🛒 Новый заказ #{$order->id}\n\n" .
+            "👤 Имя: {$order->name}\n" .
+            "📞 Телефон: {$order->phone}\n" .
+            "📧 Email: {$order->email}\n" .
+            "📦 Статус: Новый\n\n" .
+            "🛍 Список товаров:\n";
 
-        foreach ($orderDetails['products'] as $item) {
-            $message .= "- {$item['product']->name} (x{$item['quantity']}): " .
-                number_format($item['product']->price * $item['quantity'], 0, ',', ' ') . " ₽\n";
+        foreach ($order->items as $item) {
+            $message .= "- {$item['product']['name']} (x{$item['quantity']}): " .
+                number_format($item['product']['price'] * $item['quantity'], 0, ',', ' ') . " ₽\n";
         }
 
-        $message .= "\nИтого: " . number_format($orderDetails['total'], 0, ',', ' ') . " ₽";
+        $message .= "\n💰 Итого: " . number_format($order->total, 0, ',', ' ') . " ₽";
 
         Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
             'chat_id' => $chatId,
@@ -120,8 +124,9 @@ class CartController extends Controller
     }
 
     // Отправка уведомления на email
-    private function sendToEmail($orderDetails)
+    private function sendToEmail(Order $order)
     {
-        Mail::to('dtkstrazh@mail.ru')->send(new OrderNotification($orderDetails));
+        Mail::to('dtkstrazh@mail.ru')->send(new OrderNotification($order));
     }
 }
+
