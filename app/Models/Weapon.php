@@ -25,9 +25,13 @@ class Weapon extends Model
         'lifespan',
         'coating',
         'description',
-        'image',
+        'images',
         'price',
         'quantity',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     // Если используете временные метки (created_at, updated_at)

@@ -10,9 +10,7 @@
             @foreach ($products as $product)
                 <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 overflow-hidden">
                     <!-- Изображение товара -->
-                    <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}">
-
-
+                    <img id="mainImage-{{ $product->id }}" src="{{ asset('storage/public/' . $product->images[0]) }}" alt="{{ $product->name }}" class="img-fluid" style="max-width: 100%; height: auto; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}" data-image-index="0">
                     <!-- Контент карточки -->
                     <div class="p-6">
                         <!-- Название товара -->

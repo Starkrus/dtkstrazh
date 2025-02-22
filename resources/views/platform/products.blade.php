@@ -14,7 +14,7 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Изображение</th>
+                <th>Изображения</th>
                 <th>Название</th>
                 <th>Цена</th>
                 <th>Количество</th>
@@ -25,17 +25,22 @@
             @foreach ($products as $product)
                 <tr data-product-id="{{ $product->id }}">
                     <td>
-                        @if ($product->image)
-                            <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}" width="200" height="100">
+                        @if ($product->images && count($product->images) > 0)
+                            <div class="d-flex">
+                                @foreach ($product->images as $image)
+                                    <img src="{{ asset('storage/public/' . $image) }}" alt="{{ $product->name }}" width="80" height="60" class="me-2">
+                                @endforeach
+                            </div>
                         @else
-                            <span class="text-muted">Нет изображения</span>
+                            <!-- Если нет изображений, показываем заглушку -->
+                            <img src="{{ asset('images/no-image.png') }}" alt="Нет изображения" width="80" height="60">
                         @endif
                     </td>
                     <td class="product-name">{{ $product->name }}</td>
                     <td class="product-price">{{ $product->price }} ₽</td>
                     <td class="product-quantity">{{ $product->quantity }}</td>
                     <td>
-                        <!-- Кнопка для открытия модального окна редактирования -->
+                        <!-- Кнопка для открытия модального окна -->
                         <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#productModal-{{ $product->id }}">
                             Просмотр
                         </button>
@@ -56,11 +61,11 @@
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="productModalLabel-{{ $product->id }}">Редактирование: {{ $product->name }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title">Редактирование: {{ $product->name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <!-- Форма редактирования товара -->
+                                <!-- Форма редактирования -->
                                 <form id="editForm-{{ $product->id }}" method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -133,19 +138,20 @@
                                                 <label for="quantity-{{ $product->id }}">Количество</label>
                                                 <input type="number" name="quantity" id="quantity-{{ $product->id }}" class="form-control" value="{{ $product->quantity }}" required>
                                             </div>
-                                            <!-- Новое изображение -->
-                                            <div class="form-group mb-2">
-                                                <label for="image-{{ $product->id }}">Новое изображение</label>
-                                                <input type="file" name="image" id="image-{{ $product->id }}" class="form-control">
+
+
+                                            <!-- Загрузка новых изображений -->
+                                            <div class="mb-2">
+                                                <label for="images-{{ $product->id }}">Новые изображения</label>
+                                                <input type="file" name="images[]" id="images-{{ $product->id }}" class="form-control" multiple>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+
                             <div class="modal-footer">
-                                <!-- Кнопка сохранения изменений -->
                                 <button type="button" class="btn btn-primary" onclick="saveChanges({{ $product->id }})">Сохранить</button>
-                                <!-- Кнопка закрытия модального окна -->
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                             </div>
                         </div>
@@ -182,19 +188,12 @@
                     'X-Requested-With': 'XMLHttpRequest',
                 },
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP Error: ${response.status}`);
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         updateProductRow(productId, data.product);
-                        // Закрываем модальное окно
                         const modal = document.getElementById(`productModal-${productId}`);
                         if (modal) {
-                            // Если экземпляр модального окна еще не создан, создаем его
                             let modalInstance = bootstrap.Modal.getInstance(modal);
                             if (!modalInstance) {
                                 modalInstance = new bootstrap.Modal(modal);
@@ -217,10 +216,17 @@
                 row.querySelector('.product-name').textContent = productData.name;
                 row.querySelector('.product-price').textContent = `${productData.price} ₽`;
                 row.querySelector('.product-quantity').textContent = productData.quantity;
-                const img = row.querySelector('td img');
-                if (img) {
-                    img.src = productData.image ? `{{ asset('storage') }}/${productData.image}` : '';
-                }
+
+                const imgContainer = row.querySelector('td div');
+                imgContainer.innerHTML = '';
+                productData.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = `{{ asset('storage') }}/${image}`;
+                    img.alt = productData.name;
+                    img.width = 80;
+                    img.height = 60;
+                    imgContainer.appendChild(img);
+                });
             }
         }
     </script>

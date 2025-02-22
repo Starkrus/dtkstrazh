@@ -13,10 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Получаем товары с пагинацией (по 12 на страницу)
         $products = Weapon::paginate(12);
-
-        // Передаем данные в представление (например, resources/views/partials/products/product.blade.php)
         return view('partials.products.product', compact('products'));
     }
 
@@ -25,7 +22,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // Отображаем форму создания (например, resources/views/partials/products/create.blade.php)
         return view('partials.products.create');
     }
 
@@ -34,7 +30,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Валидация входящих данных
+        // Валидация данных
         $validated = $request->validate([
             'name'                    => 'required|string|max:255',
             'caliber'                 => 'required|string|max:255',
@@ -48,39 +44,28 @@ class ProductController extends Controller
             'description'             => 'nullable|string',
             'price'                   => 'required|numeric|min:0',
             'quantity'                => 'required|integer|min:0',
-            'image'                   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Создаем новый товар
-        $weapon = new Weapon();
-        $weapon->name                    = $validated['name'];
-        $weapon->caliber                 = $validated['caliber'];
-        $weapon->mount_type              = $validated['mount_type'];
-        $weapon->body_material           = $validated['body_material'];
-        $weapon->first_chamber_material  = $validated['first_chamber_material'];
-        $weapon->chamber_count           = $validated['chamber_count'];
-        $weapon->sound_reduction         = $validated['sound_reduction'];
-        $weapon->lifespan                = $validated['lifespan'];
-        $weapon->coating                 = $validated['coating'];
-        $weapon->description             = $validated['description'] ?? '';
-        $weapon->price                   = $validated['price'];
-        $weapon->quantity                = $validated['quantity'];
+        $weapon = new Weapon($validated);
 
-        // Если загружено изображение, сохраняем его
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('public/products');
-            // Сохраняем путь без префикса "public/"
-            $weapon->image = str_replace('public/', '', $path);
+        // Обработка загрузки нескольких изображений
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('public/products');
+                $imagePaths[] = str_replace('public/', '', $path);
+            }
+            $weapon->images = $imagePaths;
         }
 
         $weapon->save();
 
-        // После сохранения делаем редирект на страницу списка товаров с сообщением
         return redirect()->route('products.index')->with('success', 'Товар успешно создан!');
     }
 
     /**
-     * Отображение деталей товара (при необходимости)
+     * Отображение деталей товара
      */
     public function show($id)
     {
@@ -104,7 +89,6 @@ class ProductController extends Controller
     {
         $product = Weapon::findOrFail($id);
 
-        // Валидация данных
         $validated = $request->validate([
             'name'                    => 'required|string|max:255',
             'caliber'                 => 'required|string|max:255',
@@ -118,27 +102,28 @@ class ProductController extends Controller
             'description'             => 'nullable|string',
             'price'                   => 'required|numeric|min:0',
             'quantity'                => 'required|integer|min:0',
-            'image'                   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Если загружено новое изображение, обрабатываем его
-        if ($request->hasFile('image')) {
-            // Удаляем старое изображение, если оно существует
-            if ($product->image && Storage::exists('public/' . $product->image)) {
-                Storage::delete('public/' . $product->image);
+        if ($request->hasFile('images')) {
+            // Удаляем старые изображения
+            if (!empty($product->images)) {
+                foreach ($product->images as $oldImage) {
+                    Storage::delete('public/' . $oldImage);
+                }
             }
-            $path = $request->file('image')->store('public/products');
-            $validated['image'] = str_replace('public/', '', $path);
+
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('public/products');
+                $imagePaths[] = str_replace('public/', '', $path);
+            }
+            $validated['images'] = $imagePaths;
         }
 
         $product->update($validated);
 
-        // Если обновление происходит через AJAX, можно вернуть JSON:
-        return response()->json([
-            'success' => true,
-            'message' => 'Товар успешно обновлен',
-            'product' => $product,
-        ]);
+        return redirect()->route('products.index')->with('success', 'Товар успешно обновлён!');
     }
 
     /**
@@ -148,13 +133,14 @@ class ProductController extends Controller
     {
         $product = Weapon::findOrFail($id);
 
-        // Если изображение существует, удаляем его
-        if ($product->image && Storage::exists('public/' . $product->image)) {
-            Storage::delete('public/' . $product->image);
+        if (!empty($product->images)) {
+            foreach ($product->images as $image) {
+                Storage::delete('public/' . $image);
+            }
         }
 
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Товар удален.');
+        return redirect()->route('products.index')->with('success', 'Товар удалён.');
     }
 }

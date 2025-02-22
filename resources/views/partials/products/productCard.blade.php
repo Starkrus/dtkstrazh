@@ -8,9 +8,46 @@
         <!-- Сетка с изображением и описанием товара -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Изображение товара -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}">
-            </div>
+            <td>
+                @if ($product->images && count($product->images) > 0)
+                    <div class="d-flex flex-column">
+                        <!-- Основное изображение -->
+                        <div class="position-relative mb-2">
+                            <img id="mainImage-{{ $product->id }}" src="{{ asset('storage/public/' . $product->images[0]) }}" alt="{{ $product->name }}" class="img-fluid" style="max-width: 100%; height: auto; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}" data-image-index="0">
+
+                            <!-- Стрелки для навигации -->
+                            <button class="btn btn-secondary position-absolute top-50 start-0 translate-middle-y" id="prevImage-{{ $product->id }}" style="left: 0; z-index: 10;">&#10094;</button>
+                            <button class="btn btn-secondary position-absolute top-50 end-0 translate-middle-y" id="nextImage-{{ $product->id }}" style="right: 0; z-index: 10;">&#10095;</button>
+                        </div>
+
+                        <!-- Миниатюры изображений -->
+                        <div class="d-flex overflow-auto">
+                            @foreach ($product->images as $index => $image)
+                                <img src="{{ asset('storage/public/' . $image) }}" alt="Миниатюра {{ $index + 1 }}" class="img-thumbnail me-2" width="80" height="60" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}" data-image-index="{{ $index }}">
+                            @endforeach
+                        </div>
+
+                        <!-- Модальное окно для просмотра изображений -->
+                        <div class="modal fade" id="imageModal-{{ $product->id }}" tabindex="-1" aria-labelledby="imageModalLabel-{{ $product->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="imageModalLabel-{{ $product->id }}">Просмотр изображения</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img id="modalImage-{{ $product->id }}" src="{{ asset('storage/public/' . $product->images[0]) }}" alt="{{ $product->name }}" class="img-fluid mx-auto d-block" style="max-height: 500px; object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <img src="{{ asset('images/no-image.png') }}" alt="Нет изображения" width="80" height="60">
+                @endif
+            </td>
+
+
 
             <!-- Описание товара -->
             <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
@@ -73,5 +110,75 @@
 
         quantityElement.textContent = currentQuantity;
         quantityInput.value = currentQuantity;
+
+
     }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let images = @json($product->images);  // Получаем список изображений
+        let currentIndex = 0;  // Текущий индекс изображения
+
+        const modalElement = document.getElementById('imageModal-{{ $product->id }}');
+        const modalImage = document.getElementById('modalImage-{{ $product->id }}');
+        const mainImage = document.getElementById('mainImage-{{ $product->id }}');
+
+        // Обновляем изображение в модальном окне
+        function updateModalImage() {
+            modalImage.src = "{{ asset('storage/public/') }}/" + images[currentIndex];
+            mainImage.src = "{{ asset('storage/public/') }}/" + images[currentIndex];
+        }
+
+        // Слушаем события для стрелок
+        document.getElementById('nextImage-{{ $product->id }}').addEventListener('click', function () {
+            currentIndex = (currentIndex + 1) % images.length; // Переключение по кругу
+            updateModalImage();
+        });
+
+        document.getElementById('prevImage-{{ $product->id }}').addEventListener('click', function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length; // Переключение по кругу
+            updateModalImage();
+        });
+
+        // Обработчик для клика на миниатюры
+        const thumbImages = document.querySelectorAll(`#imageModal-{{ $product->id }} .img-thumbnail`);
+        thumbImages.forEach((thumb, index) => {
+            thumb.addEventListener('click', function () {
+                currentIndex = index;
+                updateModalImage();
+            });
+        });
+
+        // Обновляем изображение при открытии модального окна
+        modalElement.addEventListener('shown.bs.modal', function () {
+            updateModalImage();
+        });
+
+        // Обработчик для смахивания на мобильных устройствах
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        modalElement.addEventListener('touchstart', function (e) {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        modalElement.addEventListener('touchend', function (e) {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchendX < touchstartX) {
+                // Смахивание вправо — следующее изображение
+                currentIndex = (currentIndex + 1) % images.length; // Переключение по кругу
+                updateModalImage();
+            }
+            if (touchendX > touchstartX) {
+                // Смахивание влево — предыдущее изображение
+                currentIndex = (currentIndex - 1 + images.length) % images.length; // Переключение по кругу
+                updateModalImage();
+            }
+        }
+    });
 </script>
