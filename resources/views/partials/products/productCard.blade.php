@@ -13,7 +13,7 @@
                     <div class="d-flex flex-column">
                         <!-- Основное изображение -->
                         <div class="position-relative mb-2">
-                            <img id="mainImage-{{ $product->id }}" src="{{ asset('storage/public/' . $product->images[0]) }}" alt="{{ $product->name }}" class="img-fluid" style="max-width: 100%; height: auto; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}" data-image-index="0">
+                            <img id="mainImage-{{ $product->id }}" src="{{ asset('storage/public/' . $product->images[0]) }}" alt="{{ $product->name }}" class="img-fluid" style="max-width: 90%; height: auto; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}" data-image-index="0">
 
                             <!-- Стрелки для навигации -->
                             <button class="btn btn-secondary position-absolute top-50 start-0 translate-middle-y" id="prevImage-{{ $product->id }}" style="left: 0; z-index: 10;">&#10094;</button>

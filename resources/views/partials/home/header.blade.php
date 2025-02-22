@@ -68,13 +68,15 @@
 
             <!-- Навигация для больших экранов -->
             <nav class="hidden md:flex space-x-6">
-                <a href="/" class="hover:text-gray-300">Главная</a>
-                <a href="/product" class="hover:text-gray-300">Продукция</a>
-                <a href="/about" class="hover:text-gray-300">О нас</a>
-                <a href="/certificates" class="hover:text-gray-300">Сертификаты</a>
-                <a href="/partnery" class="hover:text-gray-300">Партнеры</a>
-                <a href="/contacts" class="hover:text-gray-300">Контакты</a>
-                <a href="/delivery" class="hover:text-gray-300">Доставка и оплата</a>
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="hover:text-gray-300">Главная</a></li>
+                    <li><a href="/product" class="hover:text-gray-300">Продукция</a></li>
+                    <li><a href="/about" class="hover:text-gray-300">О нас</a></li>
+                    <li><a href="/certificates" class="hover:text-gray-300">Сертификаты</a></li>
+                    <li><a href="/partnery" class="hover:text-gray-300">Партнеры</a></li>
+                    <li><a href="/contacts" class="hover:text-gray-300">Контакты</a></li>
+                    <li><a href="/delivery" class="hover:text-gray-300">Доставка и оплата</a></li>
+                </ul>
             </nav>
 
             <!-- Корзина, избранное и мобильное меню -->
@@ -115,14 +117,23 @@
         </div>
 
         <!-- Мобильное меню -->
-        <div id="mobileMenu" class="hidden md:hidden bg-gray-800 text-white mt-2 p-4 rounded">
-            <a href="/" class="block py-2 hover:text-gray-300">Главная</a>
-            <a href="/product" class="block py-2 hover:text-gray-300">Продукция</a>
-            <a href="/about" class="block py-2 hover:text-gray-300">О нас</a>
-            <a href="/certificates" class="block py-2 hover:text-gray-300">Сертификаты</a>
-            <a href="/partnery" class="block py-2 hover:text-gray-300">Партнеры</a>
-            <a href="/contacts" class="block py-2 hover:text-gray-300">Контакты</a>
-            <a href="/delivery" class="hover:text-gray-300">Доставка и оплата</a>
+        <button id="mobileMenuToggle" class="md:hidden">
+            <svg class="w-6 h-6 text-white hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+
+        <!-- Мобильное меню (выезжающее слева) -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300">
+            <div class="w-64 p-4">
+                <a href="/" class="block py-2 hover:text-gray-300">Главная</a>
+                <a href="/product" class="block py-2 hover:text-gray-300">Продукция</a>
+                <a href="/about" class="block py-2 hover:text-gray-300">О нас</a>
+                <a href="/certificates" class="block py-2 hover:text-gray-300">Сертификаты</a>
+                <a href="/partnery" class="block py-2 hover:text-gray-300">Партнеры</a>
+                <a href="/contacts" class="block py-2 hover:text-gray-300">Контакты</a>
+                <a href="/delivery" class="block py-2 hover:text-gray-300">Доставка и оплата</a>
+            </div>
         </div>
 
         <!-- Список телефонов (виден только на мобильной версии) -->
