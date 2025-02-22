@@ -71,10 +71,15 @@
                                     @method('PUT')
                                     <div class="row">
                                         <div class="col-md-4">
-                                            @if ($product->image)
-                                                <img src="{{ asset('storage/public/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid rounded">
+                                            @if ($product->images && count($product->images) > 0)
+                                                <div class="d-flex">
+                                                    @foreach ($product->images as $image)
+                                                        <img src="{{ asset('storage/public/' . $image) }}" alt="{{ $product->name }}" width="80" height="60" class="me-2">
+                                                    @endforeach
+                                                </div>
                                             @else
-                                                <span class="text-muted">Нет изображения</span>
+                                                <!-- Если нет изображений, показываем заглушку -->
+                                                <img src="{{ asset('images/no-image.png') }}" alt="Нет изображения" width="80" height="60">
                                             @endif
                                         </div>
                                         <div class="col-md-8">
