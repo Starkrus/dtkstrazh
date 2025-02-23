@@ -10,7 +10,7 @@ class Order extends Model
 {
     use HasFactory, AsSource;
 
-    protected $fillable = ['name', 'email', 'phone', 'total', 'status', 'comment', 'items', 'content'];
+    protected $fillable = ['name', 'email', 'phone', 'total', 'status', 'comment', 'items', 'content', 'comment'];
 
 
     protected $casts = [

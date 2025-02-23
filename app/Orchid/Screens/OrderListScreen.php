@@ -44,10 +44,12 @@ class OrderListScreen extends Screen
                 TD::make('status', 'Статус')
                     ->render(fn($order) => $this->statusDropdown($order))
                     ->sort(),
-                TD::make('comment', 'Комментарий')
-                    ->render(fn($order) => Input::make("comment.{$order->id}")
+                TD::make('comment', 'Комментарий')->render(function ($order) {
+                    return Input::make("comments[{$order->id}]")
                         ->value($order->comment)
-                        ->method('updateComment')),
+                        ->title('Комментарий')
+                        ->placeholder('Введите комментарий...');
+                }),
                 TD::make('actions', 'Действия')->render(fn($order) =>
                 Group::make([
                     Button::make('Удалить')
@@ -66,41 +68,13 @@ class OrderListScreen extends Screen
     private function statusDropdown(Order $order)
     {
         return Group::make([
-            // Отображение текущего статуса
             DropDown::make($this->getStatusText($order->status))
                 ->icon('caret-down')
                 ->list([
-                    Button::make('Новый')
-                        ->method('updateStatus')
-                        ->parameters([
-                            'id' => $order->id,
-                            'status' => 'new'
-                        ])
-                        ->icon($order->status === 'new' ? 'check' : ''),
-
-                    Button::make('В обработке')
-                        ->method('updateStatus')
-                        ->parameters([
-                            'id' => $order->id,
-                            'status' => 'processing'
-                        ])
-                        ->icon($order->status === 'processing' ? 'check' : ''),
-
-                    Button::make('Доставляется')
-                        ->method('updateStatus')
-                        ->parameters([
-                            'id' => $order->id,
-                            'status' => 'shipped'
-                        ])
-                        ->icon($order->status === 'shipped' ? 'check' : ''),
-
-                    Button::make('Завершён')
-                        ->method('updateStatus')
-                        ->parameters([
-                            'id' => $order->id,
-                            'status' => 'completed'
-                        ])
-                        ->icon($order->status === 'completed' ? 'check' : ''),
+                    Button::make('Новый')->method('updateStatus')->parameters(['id' => $order->id, 'status' => 'new']),
+                    Button::make('В обработке')->method('updateStatus')->parameters(['id' => $order->id, 'status' => 'processing']),
+                    Button::make('Доставляется')->method('updateStatus')->parameters(['id' => $order->id, 'status' => 'shipped']),
+                    Button::make('Завершён')->method('updateStatus')->parameters(['id' => $order->id, 'status' => 'completed']),
                 ])
         ]);
     }
@@ -119,18 +93,13 @@ class OrderListScreen extends Screen
         ]);
 
         $order = Order::findOrFail($request->input('id'));
-
-        // 4. Добавляем проверку изменения статуса
         if ($order->status !== $request->input('status')) {
             $oldStatus = $order->status;
             $order->status = $request->input('status');
             $order->save();
 
-            // 5. Форматируем сообщение с переносами строк
             $message = <<<MSG
-            📦 *Изменение статуса заказа* #{$order->id}
-            🔄 *Старый статус:* {$this->getStatusText($oldStatus)}
-            🆕 *Новый статус:* {$this->getStatusText($order->status)}
+            \n📦 *Изменение статуса заказа* #{$order->id}\n🔄 *Старый статус:* {$this->getStatusText($oldStatus)}\n🆕 *Новый статус:* {$this->getStatusText($order->status)}
             MSG;
 
             TelegramService::sendMessage($message);
@@ -139,29 +108,35 @@ class OrderListScreen extends Screen
         return redirect()->back();
     }
 
-
     public function updateComment(Request $request, $id)
     {
         $request->validate([
-            "comment.{$id}" => 'nullable|string|max:500'
+            "comments.{$id}" => 'nullable|string|max:500'
         ]);
 
-        $order = Order::findOrFail($id);
-        $order->comment = $request->input("comment.{$id}");
-        $order->save();
+        try {
+            $order = Order::findOrFail($id);
+            $order->comment = $request->input("comments.{$id}");
+            $order->save();
 
-        return redirect()->back();
+            \Log::info("Комментарий обновлен для заказа #{$id}", [
+                'comment' => $order->comment,
+                'user' => auth()->user()->id
+            ]);
+        } catch (\Exception $e) {
+            \Log::error("Ошибка сохранения комментария: " . $e->getMessage());
+        }
+
+        return redirect()->back()->with('success', 'Комментарий сохранен');
     }
 
     public function saveChanges(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-
         $order->update([
-            'comment' => $request->input("comment.{$id}"),
+            'comment' => $request->input("comments.{$id}"),
             'status' => $request->input('status', $order->status)
         ]);
-
         return redirect()->back();
     }
 

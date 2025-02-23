@@ -109,4 +109,7 @@ Route::screen('products', ProductScreen::class)
 
 Route::screen('orders', OrderListScreen::class)->name('platform.order.list');
 
+Route::post('orders/update-comment/{id}', [OrderListScreen::class, 'updateComment'])
+    ->name('platform.order.list.update-comment');
+
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
