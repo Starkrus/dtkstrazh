@@ -6,7 +6,7 @@ use App\Mail\OrderNotification;
 use App\Models\Order;
 use App\Models\Weapon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+//use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
 
 class CartController extends Controller
@@ -89,7 +89,7 @@ class CartController extends Controller
 
         // Отправка уведомлений
         $this->sendToTelegram($order);
-        $this->sendToEmail($order);
+//        $this->sendToEmail($order);
 
         // Очистка корзины после оформления заказа
         session()->forget('cart');
@@ -100,19 +100,18 @@ class CartController extends Controller
     // Отправка уведомления в Telegram
     private function sendToTelegram(Order $order)
     {
-        $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID');
+        $token = config('services.telegram.bot_token');
+        $chatId = config('services.telegram.chat_id');
 
-        $message = "🛒 Новый заказ #{$order->id}\n\n" .
-            "👤 Имя: {$order->name}\n" .
-            "📞 Телефон: {$order->phone}\n" .
-            "📧 Email: {$order->email}\n" .
-            "📦 Статус: Новый\n\n" .
-            "🛍 Список товаров:\n";
+        $message = "🛒 Новый заказ #{$order->id}\n\n"
+            . "👤 Имя: {$order->name}\n"
+            . "📞 Телефон: {$order->phone}\n"
+            . "📧 Email: {$order->email}\n\n"
+            . "🛍 Товары:\n";
 
         foreach ($order->items as $item) {
-            $message .= "- {$item['product']['name']} (x{$item['quantity']}): " .
-                number_format($item['product']['price'] * $item['quantity'], 0, ',', ' ') . " ₽\n";
+            $message .= "- {$item['product']['name']} (x{$item['quantity']}) - "
+                . number_format($item['product']['price'] * $item['quantity'], 0, ',', ' ') . " ₽\n";
         }
 
         $message .= "\n💰 Итого: " . number_format($order->total, 0, ',', ' ') . " ₽";
@@ -120,13 +119,13 @@ class CartController extends Controller
         Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
             'chat_id' => $chatId,
             'text' => $message,
+            'parse_mode' => 'HTML'
         ]);
     }
 
     // Отправка уведомления на email
-    private function sendToEmail(Order $order)
-    {
-        Mail::to('dtkstrazh@mail.ru')->send(new OrderNotification($order));
-    }
+//    private function sendToEmail(Order $order)
+//    {
+//        Mail::to('dtkstrazh@mail.ru')->send(new OrderNotification($order));
+//    }
 }
-
